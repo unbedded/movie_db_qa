@@ -210,6 +210,9 @@ __marimo__/
 .claude/
 CLAUDE.md
 
+# CI debugging artifacts
+tests/github_ci_errors/
+
 # IDE
 .vscode/
 .idea/
