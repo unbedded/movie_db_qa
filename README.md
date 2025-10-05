@@ -214,7 +214,8 @@ open docs/reports/coverage-report-v0.3.0.html
 | Language | Python | 3.13 | Test implementation |
 | Test Framework | pytest | ≥7.0 | Test runner and assertions |
 | Coverage | pytest-cov | ≥4.0 | Code coverage reporting |
-| Browser Automation | selenium/playwright | TBD | Web UI testing (Phase 3 decision) |
+| Browser Automation | Playwright | ≥1.40 | Web UI testing + API interception |
+| Test Plugin | pytest-playwright | ≥0.4 | Playwright integration |
 | Linter | ruff | ≥0.1.0 | Fast Python linter |
 | Type Checker | mypy | ≥1.0 | Static type checking |
 | Formatter | black | ≥23.0 | Code formatting |
@@ -232,8 +233,33 @@ open docs/reports/coverage-report-v0.3.0.html
 ```
 src/movie_db_qa/pages/    # Page objects
 tests/test_*.py            # Test cases
-tests/conftest.py          # Pytest fixtures
+tests/conftest.py          # Pytest fixtures + API interception
 ```
+
+### API Validation
+
+**Playwright Network Interception** - Tests validate browser API calls to TMDB endpoints:
+
+```python
+# conftest.py - Automatic API call capture
+page.on("request", handle_request)  # Intercept all network requests
+page.api_calls  # List of captured API calls
+
+# test_foundation.py - API assertions
+api_calls = page.api_calls
+movie_calls = [call for call in api_calls if "/movie/" in call["url"]]
+assert len(movie_calls) > 0, "Should make API call to TMDB"
+```
+
+**Validated Endpoints:**
+- `/movie/popular?page=1` - Popular filter
+- `/movie/trending` - Trending filter
+- `/movie/popular?page=2` - Pagination
+
+**Benefits:**
+- Verifies UI actions trigger correct backend calls
+- Validates query parameters (page, sort_by, filters)
+- Detects API integration issues early
 
 📖 **[View design decisions →](docs/design-decisions.md)**
 📖 **[See pyproject.toml →](pyproject.toml)**
@@ -284,12 +310,29 @@ make quality
 ### Viewing Reports
 
 ```bash
-# Coverage report (HTML)
+# 1. Fresh HTML test report
+open report/index.html
+
+# 2. Fresh coverage report
 open htmlcov/index.html
 
-# Test report (console output during test run)
-pytest -v --tb=short
+# 3. Test execution log file
+cat logs/test_execution.log
+
+# 4. Failure screenshots (auto-captured)
+ls screenshots/  # Only populated on test failures
+
+# Or view sample reports (v0.3.0 baseline):
+open docs/reports/test-report-v0.3.0.html
+open docs/reports/coverage-report-v0.3.0.html
+open docs/images/example-test-failure-screenshot.png
 ```
+
+**Screenshot Capture:**
+- Automatically captures screenshots on test failure
+- Saved to `screenshots/` directory (gitignored)
+- Example: `docs/images/example-test-failure-screenshot.png`
+- Triggered by pytest hook in `tests/conftest.py`
 
 ### CI Pipeline
 

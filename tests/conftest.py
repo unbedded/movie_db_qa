@@ -111,6 +111,31 @@ def page(context: BrowserContext, request: pytest.FixtureRequest) -> Generator[P
     """
     page = context.new_page()
     page.set_default_timeout(config.timeout)
+
+    # Store API calls for validation (attached to page for test access)
+    api_calls: list[dict[str, Any]] = []
+    page.api_calls = api_calls  # type: ignore[attr-defined]
+
+    def handle_request(request: Any) -> None:
+        """Capture API requests for validation.
+
+        Args:
+            request: Playwright request object
+        """
+        # Filter for TMDB API calls
+        if "api.themoviedb.org" in request.url:
+            api_calls.append(
+                {
+                    "url": request.url,
+                    "method": request.method,
+                    "resource_type": request.resource_type,
+                }
+            )
+            logger.info("API call captured: %s %s", request.method, request.url)
+
+    # Attach request listener
+    page.on("request", handle_request)
+
     yield page
 
     # Capture screenshot on test failure
