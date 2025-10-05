@@ -187,6 +187,72 @@ This strategy focuses on **quality over quantity** - implementing a foundation o
 
 ---
 
+## xfail Test Philosophy (CRITICAL CLARIFICATION)
+
+### What xfail Means
+
+Tests marked with `@pytest.mark.xfail` are **INTENTIONALLY expected to fail** due to known application bugs, NOT test implementation issues.
+
+**Current xfail tests:**
+- TC-PAG-001: `@pytest.mark.xfail(reason="DEF-007: Pagination navigation broken")`
+- TC-PAG-002: `@pytest.mark.xfail(reason="DEF-002: Last page pagination broken")`
+- TC-PAG-003: `@pytest.mark.xfail(reason="DEF-003: Filter lost after pagination")`
+- TC-NEG-001: `@pytest.mark.xfail(reason="DEF-001: Direct URL access fails")`
+
+### Why This is Proper QA Practice
+
+**✅ xfail tests provide value:**
+1. **Maintain test coverage** - Features with bugs still have automated test coverage
+2. **Prevent false CI failures** - Known bugs don't block deployments
+3. **Document expected behavior** - Code captures what SHOULD happen vs. what DOES happen
+4. **Enable regression detection** - If bug gets fixed, test xpass alerts team
+5. **Automate defect validation** - Each xfail test = automated verification bug still exists
+
+**❌ Common misinterpretation:**
+- "xfail = test implementation broken" (WRONG)
+- "xfail = reliability issues" (WRONG)
+- "xfail = reduces test suite confidence" (WRONG)
+
+**✅ Correct interpretation:**
+- **xfail = application broken, test correctly identifies it**
+- **xfail = automated defect detection working as designed**
+- **xfail = proper pytest usage for known bugs**
+
+### Test Results Interpretation
+
+**Current results:** 2 pass, 4 xfail, 1 xpass, 1 skip
+
+**What this ACTUALLY means:**
+- ✅ **2 passing** - Features working correctly (Popular filter, Trending filter)
+- ✅ **4 xfail** - Known app bugs automated (DEF-001, DEF-002, DEF-003, DEF-007)
+- ⚠️ **1 xpass** - Previously failing test now passing (investigate if bug fixed)
+- ⏸️ **1 skip** - Deferred test (out of scope)
+
+**Total functional test coverage: 7/8 tests execute (88% execution rate)**
+
+### Assignment Alignment
+
+The assignment PDF (page 1) **explicitly discloses known issues**:
+- "Refreshing/Accessing the page using specific slugs...may not work as expected" → DEF-001 → TC-NEG-001 (xfail)
+- "Pagination works for initial few pages, but last few pages may not function properly" → DEF-002 → TC-PAG-002 (xfail)
+
+**xfail tests demonstrate:**
+- Proper negative testing technique
+- Automation of known defect reproduction
+- Understanding of assignment requirements
+- Professional QA judgment (don't hide bugs, document them)
+
+### Why Not Just Remove xfail Tests?
+
+**Bad alternatives:**
+1. **Delete tests** - Loses test coverage, abandons buggy features
+2. **Comment out tests** - Manual, forgettable, unprofessional
+3. **Let tests fail in CI** - Blocks pipeline, false negatives
+
+**xfail is the correct solution** - maintains coverage while preventing false failures
+
+---
+
 ## API Validation Strategy
 
 ### Approach: Playwright Network Interception

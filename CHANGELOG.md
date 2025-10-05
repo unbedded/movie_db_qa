@@ -8,10 +8,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [Unreleased]
 
 ### Added
-- Nothing yet
+- xfail test philosophy documentation in test-strategy.md
+- Test results interpretation section in README.md
+- Clarifying comments in conftest.py about xfail usage
+- Requirements traceability diagram in README.md (shows source documents → deliverables flow)
+- Requirements origin section in ai-qa-testing.md (explains PDF + app exploration sources)
+- Comprehensive rubric clarification document (docs/rubric-xfail-clarification.md)
+- "How Traceability Tags Work" section in README.md with concrete YAML example
+- Explanation of rubric AI evaluation role in automated validation (0-100 score)
+- Claude Code dependency analysis in ai-qa-testing.md (what requires CLI vs. portable)
+- API migration path documentation (Claude Code CLI → Anthropic API automation)
 
 ### Changed
-- Nothing yet
+- Enhanced documentation to clarify xfail tests indicate application bugs, not test implementation issues
+- Reorganized README with traceability as first major section after header
+- Replaced ASCII flowchart with structured STEP format (PDF-safe rendering)
+- Clarified requirements.yml header to explain "PDF" citations refer to assignment document
 
 ## [1.0.0] - 2025-10-04
 

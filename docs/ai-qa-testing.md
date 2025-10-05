@@ -17,6 +17,49 @@ This document captures a paradigm shift in QA automation enabled by AI tooling (
 
 ---
 
+## Requirements Origin (Where They Come From)
+
+### Source Documents
+
+This project's requirements come from **two sources**:
+
+**1. Assignment PDF** (`reference/rr_qa_automation_assignment_.pdf`)
+- Explicit requirements from assignment (e.g., "HTML reports required", "5+ defects found")
+- Known issues disclosure (e.g., "Direct URL access broken", "Last page pagination fails")
+- Meta-requirements (e.g., "Explain WHY for each test case")
+
+**2. Application Exploration** (Captured in `docs/requirements.md`)
+- Reverse-engineered from manual app testing
+- UX assumptions based on industry standards (IMDb, Netflix patterns)
+- Expected behavior for undocumented features
+
+### Requirements Synthesis
+
+```
+Assignment PDF (explicit)        App Exploration (inferred)
+        ↓                                  ↓
+   "5+ defects"                  "Popular filter should work"
+   "HTML reports"                "Pagination should persist filters"
+        ↓                                  ↓
+        └──────────────┬───────────────────┘
+                       ↓
+              requirements.yml
+           (Structured, machine-readable)
+                       ↓
+            FLT-CAT-1.1: Popular filter
+            PAG-2.1: Filter persistence
+            ASSIGN-6: 5 defects required
+```
+
+**Key distinction:**
+- **PDF requirements** = What evaluator expects (grading criteria)
+- **App requirements** = What app should do (testing targets)
+- **requirements.yml** = Unified structured format enabling automation
+
+📖 **[See full requirements source breakdown →](requirements.md)**
+
+---
+
 ## Traditional QA Workflow
 
 ### The Old Way (Manual Process)
@@ -506,6 +549,130 @@ AI doesn't automate QA work - it **amplifies QA thinking**.
 **Traditional QA role:** Test executor
 
 **AI-augmented QA role:** Strategic test designer + AI workflow architect
+
+---
+
+## AI API Requirements
+
+### What Needs AI?
+
+**Only the rubric evaluation** - generating scored reports in `rubric/reports/`
+
+**Current approach:** Manual - paste prompts into Claude Code CLI, copy output
+
+**Future approach:** Automated - `scripts/rubric_eval.py` using Anthropic API
+
+---
+
+### Automated Rubric Evaluation (Future Enhancement)
+
+**To automate rubric evaluation, create:** `scripts/rubric_eval.py`
+
+```python
+#!/usr/bin/env python3
+"""AI-powered rubric evaluation using Anthropic API.
+
+Replaces manual Claude Code CLI workflow with automated API calls.
+"""
+
+import anthropic
+import os
+from pathlib import Path
+
+# Configuration
+API_KEY = os.environ["ANTHROPIC_API_KEY"]
+MODEL = "claude-sonnet-4-5-20250929"
+MAX_TOKENS = 16000
+
+def load_prompt_and_rubric():
+    """Load evaluation prompt and rubric criteria."""
+    prompt_path = Path("rubric/eval-prompt.md")
+    rubric_path = Path("rubric/eval-rubric.md")
+
+    prompt = prompt_path.read_text()
+    rubric = rubric_path.read_text()
+
+    return f"{prompt}\n\n{rubric}"
+
+def load_project_files():
+    """Load all files needed for evaluation."""
+    files_to_read = [
+        "README.md",
+        "docs/test-cases.md",
+        "docs/test-strategy.md",
+        "docs/defects-manual-found.md",
+        "docs/design-decisions.md",
+        "tests/test_foundation.py",
+        "tests/conftest.py",
+        "src/movie_db_qa/pages/discover_page.py",
+        "pyproject.toml",
+        ".github/workflows/ci.yml",
+        "requirements.yml",
+    ]
+
+    project_context = ""
+    for file_path in files_to_read:
+        if Path(file_path).exists():
+            content = Path(file_path).read_text()
+            project_context += f"\n\n## File: {file_path}\n\n```\n{content}\n```\n"
+
+    return project_context
+
+def evaluate_with_api(phase: str = "phase4"):
+    """Run rubric evaluation via Anthropic API."""
+    client = anthropic.Anthropic(api_key=API_KEY)
+
+    # Build evaluation prompt
+    system_prompt = load_prompt_and_rubric()
+    project_files = load_project_files()
+
+    user_message = f"""
+Evaluate this QA automation project against the rubric.
+
+{project_files}
+
+Generate a complete evaluation report in markdown format with:
+- Executive summary with total score
+- Detailed category breakdowns
+- Strengths and gaps
+- Recommendations
+"""
+
+    # Call API
+    response = client.messages.create(
+        model=MODEL,
+        max_tokens=MAX_TOKENS,
+        system=system_prompt,
+        messages=[{"role": "user", "content": user_message}]
+    )
+
+    # Extract report
+    report = response.content[0].text
+
+    # Save to file
+    output_path = Path(f"rubric/reports/{phase}-rubric-eval.md")
+    output_path.write_text(report)
+
+    print(f"✅ Evaluation complete: {output_path}")
+    return report
+
+if __name__ == "__main__":
+    evaluate_with_api()
+```
+
+**Usage:**
+
+```bash
+# Set API key
+export ANTHROPIC_API_KEY="sk-ant-..."
+
+# Run evaluation
+python scripts/rubric_eval.py
+
+# Output: rubric/reports/phase4-rubric-eval.md (84/100)
+```
+
+**Note:** This project uses manual Claude Code CLI approach (no API setup needed). API automation is documented for future production use.
 
 ---
 

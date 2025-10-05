@@ -1,7 +1,7 @@
 # QA Automation Project Evaluation Report
 
 **Project:** movie_db_qa
-**Branch:** feature/update-todo
+**Branch:** feature/test-api-and-debt
 **Evaluated:** 2025-10-04
 **Evaluator:** AI Senior QA Manager
 **Phase:** Phase 4 - API Validation + Technical Debt Cleanup
