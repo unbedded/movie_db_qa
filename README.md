@@ -38,7 +38,7 @@ movie_db_qa/
 │       └── ci.yml                            # GitHub Actions CI/CD pipeline
 │
 ├── docs/                                     # 📚 Documentation
-│   ├── defects.md                            # Bug reports with evidence (6 defects)
+│   ├── defects-manual-found.md                            # Bug reports with evidence (6 defects)
 │   ├── design-decisions.md                   # Design rationale and trade-offs
 │   ├── requirements.md                       # Reverse-engineered requirements
 │   ├── test-cases.md                         # Test case specifications (Phase 2)
@@ -46,6 +46,9 @@ movie_db_qa/
 │   ├── images/                               # Screenshots for defect evidence
 │   │   ├── BugPageRefresh_1of1.png
 │   │   └── BugPagination_outragousPageNum_2of2.png
+│   ├── reports/                              # 📊 Sample test/coverage reports
+│   │   ├── test-report-v0.3.0.html           # Sample test results report
+│   │   └── coverage-report-v0.3.0.html       # Sample coverage report
 │   └── reference/                            # Assignment reference materials
 │       ├── assignment-overview.md
 │       └── priorities.md
@@ -61,12 +64,16 @@ movie_db_qa/
 │           └── config.py                     # Settings management
 │
 ├── tests/                                    # 🧪 Test Suite
-│   ├── conftest.py                           # Pytest fixtures (Phase 3)
-│   ├── test_filtering.py                     # Category/search filter tests
-│   ├── test_pagination.py                    # Navigation and boundary tests
-│   ├── test_negative.py                      # Error handling edge cases
+│   ├── conftest.py                           # Pytest fixtures + screenshot capture
+│   ├── test_foundation.py                    # 8 foundation test cases (Phase 3)
 │   ├── test_sanity.py                        # Framework sanity checks
 │   └── github_ci_errors/                     # CI debugging logs
+│
+├── screenshots/                              # 📸 Test Failure Screenshots (gitignored)
+│   └── *.png                                 # Auto-captured on test failure
+│
+├── logs/                                     # 📋 Test Execution Logs (gitignored)
+│   └── test_execution.log                    # Full test run trace with timestamps
 │
 ├── rubric/                                   # 📊 Evaluation Framework
 │   ├── eval-rubric.md                        # 100-point scoring criteria
@@ -132,7 +139,13 @@ make quality
 make test-full
 
 # 5. View reports
-open htmlcov/index.html  # Coverage report
+open htmlcov/index.html        # Fresh coverage report
+open report/index.html          # Fresh test results report
+cat logs/test_execution.log     # Test execution log file
+
+# Or view sample reports (v0.3.0 baseline):
+open docs/reports/test-report-v0.3.0.html
+open docs/reports/coverage-report-v0.3.0.html
 ```
 
 ---
@@ -363,24 +376,24 @@ def browser():
 
 ### Summary
 
-**Total:** 6 defects (exceeds 5 minimum requirement ✅)
+**Total:** 5 defects (meets 5 minimum requirement ✅)
 - **Known issues:** 2 (disclosed in assignment)
-- **New defects:** 4 (found during exploratory testing)
+- **New defects:** 3 (found during exploratory testing)
 
 ### Severity Breakdown
 
 | Severity | Count | Defect IDs |
 |----------|-------|------------|
 | High | 3 | DEF-001, DEF-002, DEF-003 |
-| Medium | 3 | DEF-004, DEF-005, DEF-006 |
+| Medium | 2 | DEF-004, DEF-005 |
 
 ### Notable Defects
 
+- **DEF-002 (High):** Filter + Last page pagination broken - High page numbers cause errors when clicked
 - **DEF-003 (High):** Filter lost after pagination - Users can't browse filtered results across pages
 - **DEF-005 (Medium):** Page refresh loses state - Can't bookmark or share filtered views
-- **DEF-006 (Medium):** Outrageous page numbers displayed - Shows impossible page counts
 
-📖 **[View complete defect reports →](docs/defects.md)**
+📖 **[View complete defect reports →](docs/defects-manual-found.md)**
 
 ---
 
@@ -444,7 +457,7 @@ Stages:
 | [docs/requirements.md](docs/requirements.md) | Reverse-engineered requirements with semantic IDs |
 | [docs/test-strategy.md](docs/test-strategy.md) | Testing approach and rationale |
 | [docs/test-cases.md](docs/test-cases.md) | Test case specifications with WHY explanations |
-| [docs/defects.md](docs/defects.md) | Bug reports with reproduction steps and evidence |
+| [docs/defects-manual-found.md](docs/defects-manual-found.md) | Bug reports with reproduction steps and evidence |
 | [docs/design-decisions.md](docs/design-decisions.md) | Design rationale, alternatives, and trade-offs |
 
 ### Configuration
@@ -474,6 +487,23 @@ main              # Production releases (v0.2.0, v1.0.0)
 develop           # Integration branch
 feature/*         # Feature development branches
 ```
+
+**Assignment Policy:** Keep ALL remote branches to demonstrate development progression and version control maturity (evaluator requirement).
+
+### Branch Tracking
+
+| Branch | Status | Purpose | Commits | Preserved |
+|--------|--------|---------|---------|-----------|
+| `main` | ✅ Current | Production releases | v0.2.0 tag | Yes |
+| `develop` | ✅ Current | Integration branch | Latest work | Yes |
+| `feature/update-todo` | ✅ Merged | Phase 2 documentation & foundation | eed4fa7 | **Remote kept** ✅ |
+| `feature/test-impl` | ⏳ Current | Phase 3 test implementation | TBD | Will keep |
+
+**Key Commits:**
+- `eed4fa7` - Phase 2 complete: docs + foundation setup (feature/update-todo)
+- `3f06fa3` - v0.2.0 release (release/0.2.0 → main)
+- `3d07371` - Initial framework setup
+- `1b14319` - Initial commit
 
 ### Making Changes
 

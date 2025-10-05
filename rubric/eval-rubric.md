@@ -309,7 +309,7 @@
 
 When evaluating a project:
 
-1. **Read ALL documentation** first (README, test-cases.md, test-strategy.md, defects.md)
+1. **Read ALL documentation** first (README, test-cases.md, test-strategy.md, defects-manual-found.md)
 2. **Review code** for structure, patterns, and quality
 3. **Check test execution** - do they run? Are reports generated?
 4. **Score each category** using the rubric
