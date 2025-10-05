@@ -24,6 +24,9 @@
 - [🐛 Defects Found](#-defects-found)
 - [🔄 CI Integration Approach](#-ci-integration-approach)
 - [📚 Documentation](#-documentation)
+- [🤝 Development Workflow](#-development-workflow)
+- [📊 Project Status](#-project-status)
+- [📝 Assignment Context](#-assignment-context)
 
 ---
 
