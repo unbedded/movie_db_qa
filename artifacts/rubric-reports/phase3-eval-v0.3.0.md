@@ -121,7 +121,7 @@ This project demonstrates solid QA automation fundamentals with excellent docume
 - **Meets minimum requirement:** 5 defects documented (2 known + 3 new)
 - **Clear reproduction steps:** Each defect has numbered steps anyone can follow
 - **Preconditions stated:** All defects specify "Incognito/private browser window"
-- **Screenshots included:** `docs/images/` contains visual evidence for DEF-002, DEF-004, DEF-005
+- **Screenshots included:** `artifacts/defect-manual-reports/screenshots/` contains visual evidence for DEF-002, DEF-004, DEF-005
 - **Severity ratings:** High (3) and Medium (2) properly assigned based on user impact
 
 **Weaknesses:**

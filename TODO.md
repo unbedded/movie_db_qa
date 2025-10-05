@@ -100,8 +100,8 @@
   - [x] Manually explored https://tmdb-discover.surge.sh/
   - [x] Created `docs/requirements.md` (reverse-engineered specs with semantic IDs)
   - [x] Found 5 defects (DEF-001 through DEF-005) - meets 5 minimum!
-  - [x] Created `docs/defects-manual-found.md` with simple 6-line format
-  - [x] Captured screenshots in `docs/images/`
+  - [x] Created `artifacts/defect-manual-reports/defects-manual-found.md` with simple 6-line format
+  - [x] Captured screenshots in `artifacts/defect-manual-reports/screenshots/`
 
 - [x] **Documentation (25% of assignment score!):**
   - [x] Created comprehensive `docs/design-decisions.md` (14 sections)
@@ -223,7 +223,7 @@
 
 - [x] Temporarily break TC-FLT-CAT-001 test
 - [x] Run test to generate failure screenshot
-- [x] Copy screenshot to `docs/images/example-test-failure-screenshot.png`
+- [x] Copy screenshot to `artifacts/defect-manual-reports/screenshots/example-test-failure-screenshot.png`
 - [x] Revert test to passing state
 - [x] Update README: Add screenshot capture section with example
 - [x] Add comment in conftest.py explaining screenshot trigger conditions
@@ -250,7 +250,7 @@
   - [x] API assertions in 3 tests (TC-FLT-CAT-001, TC-FLT-CAT-002, TC-PAG-001)
   - [x] TMDB endpoints validated: `/movie/popular`, `/trending/movie/week`, page parameters
 - [x]  Screenshot capture demonstrated
-  - [x] Example screenshot: `docs/images/example-test-failure-screenshot.png`
+  - [x] Example screenshot: `artifacts/defect-manual-reports/screenshots/example-test-failure-screenshot.png`
   - [x] Auto-capture working (pytest hook verified)
 - [x]  Magic numbers eliminated
   - [x] `config.base_url` and `config.expected_results_per_page` in config.py
@@ -365,8 +365,8 @@ AI-powered QA deliverable:
 
 ### PRIORITY 3: Missing Defect Screenshots  DONE
 - [x] Added defect screenshot placeholders for DEF-001, DEF-003
-  - [x] docs/images/DEF-001-direct-url-fails.md (explains navigation failure)
-  - [x] docs/images/DEF-003-filter-persistence.md (notes XPASS status)
+  - [x] artifacts/defect-manual-reports/screenshots/DEF-001-direct-url-fails.md (explains navigation failure)
+  - [x] artifacts/defect-manual-reports/screenshots/DEF-003-filter-persistence.md (notes XPASS status)
 - [x] Existing screenshots preserved:
   - [x] DEF-002: Last page error screenshot
   - [x] DEF-004: Blank results screenshot
@@ -392,11 +392,11 @@ AI-powered QA deliverable:
 - [x] Updated all references to new paths
 - [x] Clarified `make audit` as future enhancement (not implemented)
 - [x] Final review and approval of rubric report structure
-- [x] Create manual traceability report (rubric/reports/traceability-report.md)
+- [x] Create manual traceability report (artifacts/rubric-reports/req-traceability-report.md)
 - [ ] Commit all rubric improvements to feature/traceability
 
 ### PRIORITY 6: Traceability Coverage Report (COMPLETE)
-- [x] Create `rubric/reports/traceability-report.md` - Manual validation report
+- [x] Create `artifacts/rubric-reports/req-traceability-report.md` - Manual validation report
   - [x] Coverage summary: 17/17 requirements traced (100%)
   - [x] Requirement → Design → Test → Artifact mapping table
   - [x] Orphaned test detection (tests without requirements) - 0 found ✅
@@ -434,46 +434,75 @@ AI-powered QA deliverable:
 
 ---
 
-## <span style="color:red">v1.2.0: Project Structure Cleanup (feature/artifacts)</span>
-**Branch:** Will create `feature/artifacts` after `feature/traceability` merged
-**Goal:** Centralize generated artifacts (cleaner project root)
-**Time Budget:** 30-45 minutes
-**Rubric Impact:** Improves Professional Presentation (cleaner project root)
-**Status:** DEFERRED - Low priority cleanup, not blocking submission
+## <span style="color:green">✅ v1.2.0: Artifacts Cleanup (feature/artifacts) - COMPLETE</span>
+**Branch:** `feature/artifacts` (ready for merge to develop)
+**Goal:** Centralize all deliverables under `artifacts/` with descriptive naming
+**Time Spent:** 2 hours
+**Rubric Impact:** Improves Professional Presentation (cleaner project root, self-documenting structure)
+**Status:** ✅ Complete - ready to commit and merge
 
-### Context: The Problem
+### What Was Accomplished:
 
-**Current State:**
-- Generated files scattered in project root: `htmlcov/`, `report/`, `screenshots/`, `logs/`
-- No global constants - paths hardcoded everywhere (brittle links)
-- Every directory move = manual markdown link updates (error-prone)
-- Unclear what files are "deliverables" vs "source"
+#### PRIORITY 1: Centralized Artifact Structure ✅ COMPLETE
+- [x] Created `artifacts/` directory with descriptive subdirectories:
+  - [x] `artifacts/defect-manual-reports/` - Manual defect reports (exploratory testing)
+  - [x] `artifacts/defect-manual-reports/screenshots/` - Defect evidence screenshots
+  - [x] `artifacts/rubric-reports/` - AI rubric evaluations (manual artifacts)
+  - [x] `artifacts/qa-reports/` - QA test execution reports (pytest-html)
+  - [x] `artifacts/qa-coverage/` - QA code coverage reports
+  - [x] `artifacts/bug-screenshots/` - Auto-captured bug screenshots
+  - [x] `artifacts/logs/` - Execution logs
+- [x] Updated all output paths to `artifacts/`:
+  - [x] `conftest.py`: screenshot path → `artifacts/bug-screenshots/`
+  - [x] `conftest.py`: log path → `artifacts/logs/`
+  - [x] `Makefile`: coverage → `artifacts/qa-coverage/`
+  - [x] `Makefile`: HTML report → `artifacts/qa-reports/`
+  - [x] `Makefile`: `clean-artifacts` preserves manual reports
+- [x] Updated all documentation references:
+  - [x] README.md: Complete rewrite of artifacts/ structure section
+  - [x] rubric/requirements.yml: Updated all artifact paths
+  - [x] .claude/commands/rubric-eval.md: Created command documentation
 
-**Future Projects:**
-- Next project NOT Python → Can't use `pyproject.toml` for config
-- Need language-agnostic solution for path constants
+#### PRIORITY 2: Directory Consolidation ✅ COMPLETE
+- [x] Consolidated `reference/` directories:
+  - [x] Moved `reference/rr_qa_automation_assignment_.pdf` → `docs/reference/`
+  - [x] Removed duplicate root-level `reference/` directory
+  - [x] Updated all references in README, rubric files
 
-### PRIORITY 1: Create `artifacts/` Directory (DEFERRED TO TECHNICAL DEBT)
-- [ ] Create `artifacts/` directory structure:
-  - [ ] `artifacts/reports/` - **HTML test reports** (pytest-html output: index.html, assets/)
-  - [ ] `artifacts/coverage/` - **Coverage HTML reports** (htmlcov → artifacts/coverage/)
-  - [ ] `artifacts/screenshots/` - **Test failure screenshots** (PNG files from conftest.py hook)
-  - [ ] `artifacts/logs/` - **Execution logs** (test_execution.log)
-- [ ] Hardcode output paths to `artifacts/` in code:
-  - [ ] Update `conftest.py` screenshot path → `artifacts/screenshots/`
-  - [ ] Update `conftest.py` log path → `artifacts/logs/`
-  - [ ] Update `Makefile` coverage → `artifacts/coverage/`
-  - [ ] Update `Makefile` HTML report → `artifacts/reports/`
-- [ ] Update `.gitignore` to track `artifacts/` (NOT ignored - graded assignment!)
-- [ ] Update README references to new artifact paths
-- [ ] Test: `make test-full` outputs to `artifacts/`
-- [ ] Verify CI still works
+#### PRIORITY 3: Stale Directory Cleanup ✅ COMPLETE
+- [x] Removed stale directories from project root:
+  - [x] `report/` - Old test reports (replaced by `artifacts/qa-reports/`)
+  - [x] `htmlcov/` - Old coverage (replaced by `artifacts/qa-coverage/`)
+  - [x] `logs/` - Old logs (replaced by `artifacts/logs/`)
+  - [x] `screenshots/` - Old screenshots (replaced by `artifacts/bug-screenshots/`)
+  - [x] `artifacts/sample-reports/` - Redundant v0.3.0 baseline reports
 
-**Decision: DEFERRED - Current structure acceptable for submission**
-- Project root has `report/`, `htmlcov/`, `screenshots/`, `logs/` - works fine
-- Cleanup is cosmetic, not functional
-- Low ROI vs. risk of breaking links/paths before submission
-- See [TECHNICAL DEBT](#-technical-debt--deferred-items) for future implementation
+#### PRIORITY 4: Descriptive Naming Convention ✅ COMPLETE
+- [x] Applied clear naming convention:
+  - [x] `reports/` → `qa-reports/` (QA test execution reports)
+  - [x] `coverage/` → `qa-coverage/` (QA code coverage reports)
+  - [x] `screenshots/` → `bug-screenshots/` (Auto-captured bug screenshots)
+  - [x] `defect-reports/` → `defect-manual-reports/` (Manual defect reports)
+  - [x] `traceability-report.md` → `req-traceability-report.md` (Requirements traceability)
+
+### Phase Gate v1.2.0 - ✅ ALL COMPLETE
+- [x] All deliverables centralized under `artifacts/`
+- [x] Clean separation: `docs/` (process) vs `artifacts/` (deliverables)
+- [x] All artifact paths updated in code (Makefile, conftest.py)
+- [x] All documentation updated (README, rubric/requirements.yml)
+- [x] All stale directories removed (report/, htmlcov/, logs/, screenshots/)
+- [x] Descriptive naming convention applied throughout
+- [x] `make clean-artifacts` preserves manual work
+- [x] Project structure matches README documentation
+- [x] `.claude/commands/rubric-eval.md` created (future rubric generation)
+
+**Success Metric:** ✅ Clean, self-documenting artifact structure with all deliverables centralized
+
+**Key Achievement:**
+- Professional project organization with docs/ (process) vs artifacts/ (deliverables)
+- Self-explanatory directory names eliminate ambiguity
+- Clean project root with only source directories
+- All paths updated and verified working
 
 ---
 
@@ -534,7 +563,7 @@ AI-powered QA deliverable:
 - [ ] Version reports by commit SHA (automatic)
 - [ ] Add download links to README
 - [ ] Keep `report/` and `htmlcov/` gitignored (regenerate fresh)
-- [ ] Sample reports in `docs/reports/` show baseline
+- [x] Sample reports removed (redundant - artifacts/ checked into git)
 
 **Implementation:**
 ```yaml
@@ -556,11 +585,11 @@ AI-powered QA deliverable:
 **Options:**
 1. **Temporarily break a passing test** → run → capture screenshot → revert
 2. **Add commented-out test with intentional failure** → documentation example
-3. **Add sample screenshot to docs/** → `docs/images/example-test-failure.png`
+3. **Add sample screenshot to docs/** → `artifacts/defect-manual-reports/screenshots/example-test-failure.png`
 4. **Update README** → explain when/how screenshots are captured
 
 **Implementation:**
-- [ ] Add sample failure screenshot to `docs/images/`
+- [ ] Add sample failure screenshot to `artifacts/defect-manual-reports/screenshots/`
 - [ ] Update README section on screenshot capture
 - [ ] Add code comment in conftest.py explaining trigger conditions
 - [ ] Consider: Add one test WITHOUT xfail to demonstrate live failure capture
@@ -585,7 +614,7 @@ Before submission, verify:
 - [ ] `README.md` - Answers ALL 8 required questions
 - [ ] `docs/test-cases.md` - Step-by-step test descriptions
 - [ ] `docs/test-strategy.md` - Testing approach and rationale
-- [ ] `docs/defects-manual-found.md` - Defect reports with evidence
+- [ ] `artifacts/defect-manual-reports/defects-manual-found.md` - Defect reports with evidence
 - [ ] `docs/design-decisions.md` - Design choices and trade-offs (shows thinking)
 - [ ] `docs/ci-integration.md` - CI approach (or in README)
 
@@ -639,7 +668,7 @@ Before submission, verify:
 | **`artifacts/` Directory** | Centralize outputs (`report/`, `htmlcov/`, `screenshots/`, `logs/`) | 30-45 min | Cosmetic | Next project |
 | **`project.yaml` Config** | Language-agnostic paths/constants at root (AI-friendly) | 1-2 hrs | **High** | Next project |
 | **`make audit` Script** | Automated traceability validation (reads `project.yaml`) | 2-3 hrs | **High** | Post-submission |
-| **Automated Traceability Report** | `make audit` auto-generates `rubric/reports/traceability-report.md` | 1 hr | Medium | Post-submission |
+| **Automated Traceability Report** | `make audit` auto-generates `artifacts/rubric-reports/req-traceability-report.md` | 1 hr | Medium | Post-submission |
 | **Link Validation in CI** | Detect broken markdown links (`make validate-links`) | 1 hr | Low | Future |
 | **`make validate-project`** | Validate `project.yaml` schema with JSON schema | 30 min | Medium | With project.yaml |
 | **Automated Link Updates** | Script to update markdown links after directory moves | 1-2 hrs | Low | If needed |
@@ -650,7 +679,7 @@ Before submission, verify:
 - Better suited for next project (learn once, apply everywhere)
 
 **Manual Workarounds (Current):**
-- ✅ Manual traceability report created ([rubric/reports/traceability-report.md](rubric/reports/traceability-report.md))
+- ✅ Manual traceability report created ([artifacts/rubric-reports/req-traceability-report.md](artifacts/rubric-reports/req-traceability-report.md))
 - ✅ Manual link updates (editor find/replace when moving files)
 - ✅ Manual path constants (hardcoded, easy to change)
 
@@ -684,12 +713,12 @@ paths:
     base: "artifacts"
     reports: "artifacts/reports"
     coverage: "artifacts/coverage"
-    screenshots: "artifacts/screenshots"
+    screenshots: "artifacts/bug-screenshots"
     logs: "artifacts/logs"
   rubric:
     base: "rubric"
     requirements: "rubric/requirements.yml"
-    reports: "rubric/reports"
+    reports: "artifacts/rubric-reports"
   docs: "docs"
   src: "src"
   tests: "tests"

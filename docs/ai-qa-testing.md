@@ -556,7 +556,7 @@ AI doesn't automate QA work - it **amplifies QA thinking**.
 
 ### What Needs AI?
 
-**Only the rubric evaluation** - generating scored reports in `rubric/reports/`
+**Only the rubric evaluation** - generating scored reports in `artifacts/rubric-reports/`
 
 **Current approach:** Manual - paste prompts into Claude Code CLI, copy output
 
@@ -600,7 +600,7 @@ def load_project_files():
         "README.md",
         "docs/test-cases.md",
         "docs/test-strategy.md",
-        "docs/defects-manual-found.md",
+        "artifacts/defect-manual-reports/defects-manual-found.md",
         "docs/design-decisions.md",
         "tests/test_foundation.py",
         "tests/conftest.py",
@@ -650,7 +650,7 @@ Generate a complete evaluation report in markdown format with:
     report = response.content[0].text
 
     # Save to file
-    output_path = Path(f"rubric/reports/{phase}-rubric-eval.md")
+    output_path = Path(f"artifacts/rubric-reports/{phase}-rubric-eval.md")
     output_path.write_text(report)
 
     print(f"✅ Evaluation complete: {output_path}")
@@ -669,7 +669,7 @@ export ANTHROPIC_API_KEY="sk-ant-..."
 # Run evaluation
 python scripts/rubric_eval.py
 
-# Output: rubric/reports/phase4-rubric-eval.md (84/100)
+# Output: artifacts/rubric-reports/phase4-rubric-eval.md (84/100)
 ```
 
 **Note:** This project uses manual Claude Code CLI approach (no API setup needed). API automation is documented for future production use.

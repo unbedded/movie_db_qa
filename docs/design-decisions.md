@@ -480,14 +480,14 @@ logger.info("Test started", extra={
 
 ---
 
-### 9.1 Manual Defect Reports (`docs/defects-manual-found.md`)
+### 9.1 Manual Defect Reports (`artifacts/defect-manual-reports/defects-manual-found.md`)
 
 **Purpose:** Document defects found during **manual exploratory testing** (Phase 2)
 
 **Contents:**
 - 5 defects found by human exploration (DEF-001 through DEF-005)
 - Clear reproduction steps
-- Screenshots as evidence (`docs/images/`)
+- Screenshots as evidence (`artifacts/defect-manual-reports/screenshots/`)
 - Severity ratings (High/Medium)
 - Preconditions (incognito browser)
 
@@ -592,8 +592,8 @@ def pytest_runtest_makereport(item, call):
 **Phase 2 (Exploration):**
 1. Manually explore app
 2. Find bugs (DEF-001, DEF-002, etc.)
-3. Document in `docs/defects-manual-found.md`
-4. Capture screenshots in `docs/images/`
+3. Document in `artifacts/defect-manual-reports/defects-manual-found.md`
+4. Capture screenshots in `artifacts/defect-manual-reports/screenshots/`
 
 **Phase 3 (Automation):**
 1. Write test cases for known defects
@@ -620,7 +620,7 @@ def pytest_runtest_makereport(item, call):
 | **Audience** | Evaluators, documentation | Developers, CI, stakeholders |
 | **Lifecycle** | One-time documentation | Continuous monitoring |
 | **Format** | Markdown | HTML + console |
-| **Location** | `docs/defects-manual-found.md` | `htmlcov/index.html` |
+| **Location** | `artifacts/defect-manual-reports/defects-manual-found.md` | `htmlcov/index.html` |
 
 ---
 
@@ -869,10 +869,10 @@ docs/
 
 | Phase | Gate | Target Score | Evaluation Artifact |
 |-------|------|--------------|---------------------|
-| Phase 2 (Test Design) | Test cases documented with WHY | ≥70/100 | `rubric/reports/phase2-eval.md` |
-| Phase 3 (Implementation) | Tests passing, code clean | ≥70/100 | `rubric/reports/phase3-eval.md` |
-| Phase 5 (Documentation) | README complete (8 sections) | ≥85/100 | `rubric/reports/phase5-eval.md` |
-| Phase 7 (Final) | Complete deliverable | ≥85/100 | `rubric/reports/final-eval.md` |
+| Phase 2 (Test Design) | Test cases documented with WHY | ≥70/100 | `artifacts/rubric-reports/phase2-eval.md` |
+| Phase 3 (Implementation) | Tests passing, code clean | ≥70/100 | `artifacts/rubric-reports/phase3-eval.md` |
+| Phase 5 (Documentation) | README complete (8 sections) | ≥85/100 | `artifacts/rubric-reports/phase5-eval.md` |
+| Phase 7 (Final) | Complete deliverable | ≥85/100 | `artifacts/rubric-reports/final-eval.md` |
 
 **Thresholds:**
 - **70/100** - Passing (professional quality)
@@ -978,7 +978,7 @@ for design_decision in design_decisions:
 
 | Competency | Evidence | Artifacts |
 |------------|----------|-----------|
-| **Professional QA Mindset** | Risk-based prioritization, formal test design (BVA, EP), 6 defects found | `docs/test-strategy.md`, `docs/defects-manual-found.md` |
+| **Professional QA Mindset** | Risk-based prioritization, formal test design (BVA, EP), 6 defects found | `docs/test-strategy.md`, `artifacts/defect-manual-reports/defects-manual-found.md` |
 | **Strong Communication** | WHY explanations, comprehensive docs, clear defect reports | `README.md` (8 sections), `docs/design-decisions.md` |
 | **Technical Competence** | Python 3.13 + type hints, CI/CD pipeline, 100% coverage target | `pyproject.toml`, `.github/workflows/ci.yml`, `Makefile` |
 | **Strategic Thinking** | Time allocation aligned with scoring, simple > complex | `TODO.md` phases, this document |

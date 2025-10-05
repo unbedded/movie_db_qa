@@ -11,12 +11,12 @@ from playwright.sync_api import Browser, BrowserContext, Page, Playwright, sync_
 from movie_db_qa.utils.config import config
 
 # Screenshot directory
-SCREENSHOT_DIR = Path("screenshots")
-SCREENSHOT_DIR.mkdir(exist_ok=True)
+SCREENSHOT_DIR = Path("artifacts/bug-screenshots")
+SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Log directory
-LOG_DIR = Path("logs")
-LOG_DIR.mkdir(exist_ok=True)
+LOG_DIR = Path("artifacts/logs")
+LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 
 @pytest.fixture(scope="session", autouse=True)

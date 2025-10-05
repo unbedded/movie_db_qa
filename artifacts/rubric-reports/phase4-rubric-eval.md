@@ -109,7 +109,7 @@ Phase 4 successfully addresses the critical assignment requirement R-5.3 "Usage 
   - Code example from conftest.py
   - Validated endpoints with query parameters
   - Benefits (verifies UI actions trigger correct backend calls)
-- **Screenshot demonstration:** `docs/images/example-test-failure-screenshot.png` shows automated capture
+- **Screenshot demonstration:** `artifacts/defect-manual-reports/screenshots/example-test-failure-screenshot.png` shows automated capture
 - **Enhanced README:** API Validation subsection under Framework Information (lines 239-265)
 
 **Improvements from Phase 3:**
@@ -174,7 +174,7 @@ Phase 4 successfully addresses the critical assignment requirement R-5.3 "Usage 
   - TC-FLT-CAT-001: Verifies `/movie/popular` endpoint called (lines 82-90)
   - TC-FLT-CAT-002: Verifies Trending endpoint called (lines 132-141)
   - TC-PAG-001: Would verify `page=2` parameter (test currently xfail)
-- **Screenshot demonstration:** Example failure screenshot at `docs/images/example-test-failure-screenshot.png`
+- **Screenshot demonstration:** Example failure screenshot at `artifacts/defect-manual-reports/screenshots/example-test-failure-screenshot.png`
 - **Logging throughout:** Lazy % formatting, appropriate levels, timestamp format
 
 **Improvements from Phase 3:**
@@ -288,7 +288,7 @@ Phase 4 successfully addresses the critical assignment requirement R-5.3 "Usage 
 > "No screenshot evidence reviewed: Tests capture screenshots but report doesn't show them"
 
 **Phase 4 Solution:**
-1. **Example screenshot added:** `docs/images/example-test-failure-screenshot.png`
+1. **Example screenshot added:** `artifacts/defect-manual-reports/screenshots/example-test-failure-screenshot.png`
 2. **README updated:** Screenshot viewing instructions (lines 322-336)
    - How to view screenshots (`ls screenshots/`)
    - Example screenshot location documented

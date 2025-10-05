@@ -20,7 +20,7 @@ Evaluate this QA automation project against the comprehensive rubric defined in 
 - `README.md` - Must answer all 8 required questions
 - `docs/test-cases.md` - Step-by-step test descriptions
 - `docs/test-strategy.md` - Testing approach and rationale
-- `docs/defects-manual-found.md` - Defect reports with evidence
+- `artifacts/defect-manual-reports/defects-manual-found.md` - Defect reports with evidence
 - `docs/assignment-overview.md` - Assignment context (reference)
 - `docs/priorities.md` - Scoring priorities (reference)
 
@@ -84,7 +84,7 @@ Evaluate this QA automation project against the comprehensive rubric defined in 
 
 #### 4. Defect Reporting (15 points)
 **Critical Questions:**
-- Are 5+ defects documented in `docs/defects-manual-found.md`?
+- Are 5+ defects documented in `artifacts/defect-manual-reports/defects-manual-found.md`?
 - Are 3+ new defects found (beyond the 2 known issues)?
 - Does each defect have: ID, Title, Severity, Priority?
 - Are reproduction steps clear and complete?

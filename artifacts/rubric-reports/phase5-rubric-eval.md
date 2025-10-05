@@ -52,12 +52,12 @@ This project demonstrates exceptional QA engineering with AI-augmented workflows
 - **Traceability clarification:** [rubric-xfail-clarification.md](../../docs/rubric-xfail-clarification.md) corrects Phase 4 scoring
 - **AI dependency analysis:** Migration path from Claude Code to standard pytest
 
-#### ✅ Defect Reporting ([defects-manual-found.md](../../docs/defects-manual-found.md))
+#### ✅ Defect Reporting ([defects-manual-found.md](../../artifacts/defect-manual-reports/defects-manual-found.md))
 - **5 defects documented** (3 new manual finds beyond assignment PDF)
 - **Defect tracking:** DEF-001 through DEF-007 with severity, repro steps
 - **Known bugs automation:** xfail tests demonstrate professional QA judgment
-- **Screenshot evidence:** 2 of 5 defects captured ([DEF-002](../../docs/images/DEF-002-last-page-error.png), [DEF-004](../../docs/images/DEF-004-blank-results.png))
-- **Missing screenshots:** [DEF-001](../../docs/images/DEF-001-direct-url-fails.md), [DEF-003](../../docs/images/DEF-003-filter-persistence.md) documented with explanations
+- **Screenshot evidence:** 2 of 5 defects captured ([DEF-002](../../artifacts/defect-manual-reports/screenshots/DEF-002-last-page-error.png), [DEF-004](../../artifacts/defect-manual-reports/screenshots/DEF-004-blank-results.png))
+- **Missing screenshots:** [DEF-001](../../artifacts/defect-manual-reports/screenshots/DEF-001-direct-url-fails.md), [DEF-003](../../artifacts/defect-manual-reports/screenshots/DEF-003-filter-persistence.md) documented with explanations
 
 #### ✅ Automation Quality ([tests/conftest.py](../../tests/conftest.py))
 - **API validation:** Captures all TMDB API calls, validates endpoints ([conftest.py:47-84](../../tests/conftest.py#L47-L84))
@@ -153,7 +153,7 @@ This deliverable demonstrates mastery of AI-augmented QA workflows with:
 4. How to Run: ✅ Yes (4/4 points) - Prerequisites, installation, commands, reports all documented
 5. Test Design Techniques: ✅ Yes (3/3 points) - BVA, EP, Exploratory explained with examples
 6. Coding Patterns: ✅ Yes (3/3 points) - POM, logging, config management explained
-7. Defects Found: ✅ Yes (2/2 points) - Summary + link to [defects-manual-found.md](../../docs/defects-manual-found.md)
+7. Defects Found: ✅ Yes (2/2 points) - Summary + link to [defects-manual-found.md](../../artifacts/defect-manual-reports/defects-manual-found.md)
 8. CI Approach: ✅ Yes (2/2 points) - [GitHub Actions](../../.github/workflows/ci.yml) documented
 
 **Strengths:**
@@ -191,9 +191,9 @@ This deliverable demonstrates mastery of AI-augmented QA workflows with:
 - Defect Documentation: 6/9 (All have proper format, steps, expected/actual; -3 for partial screenshots)
 
 **Evidence:**
-- [docs/defects-manual-found.md](../../docs/defects-manual-found.md) - 5 defects documented
-- [docs/images/DEF-002-last-page-error.png](../../docs/images/DEF-002-last-page-error.png) - Screenshot evidence
-- [docs/images/DEF-004-blank-results.png](../../docs/images/DEF-004-blank-results.png) - Screenshot evidence
+- [artifacts/defect-manual-reports/defects-manual-found.md](../../artifacts/defect-manual-reports/defects-manual-found.md) - 5 defects documented
+- [artifacts/defect-manual-reports/screenshots/DEF-002-last-page-error.png](../../artifacts/defect-manual-reports/screenshots/DEF-002-last-page-error.png) - Screenshot evidence
+- [artifacts/defect-manual-reports/screenshots/DEF-004-blank-results.png](../../artifacts/defect-manual-reports/screenshots/DEF-004-blank-results.png) - Screenshot evidence
 
 ---
 

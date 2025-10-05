@@ -4,7 +4,7 @@
 # Format: REQ-ID → source + rubric + design + tests + artifacts
 #
 # SOURCE DOCUMENTS:
-# - "PDF" = reference/rr_qa_automation_assignment_.pdf (Rapyuta assignment document)
+# - "PDF" = docs/reference/rr_qa_automation_assignment_.pdf (Rapyuta assignment document)
 # - "docs/requirements.md" = Reverse-engineered from app exploration
 #
 # NOTE: "PDF p.1" citations refer to pages in rr_qa_automation_assignment_.pdf
@@ -55,7 +55,7 @@ PAG-2.1:
   artifacts:
     - "tests/test_foundation.py::test_filter_persistence_across_pagination"
     - "docs/test-cases.md#TC-PAG-003"
-    - "docs/defects-manual-found.md#DEF-003"
+    - "artifacts/defect-manual-reports/defects-manual-found.md#DEF-003"
 
 PAG-2.2:
   desc: "Pagination handles boundary conditions"
@@ -68,7 +68,7 @@ PAG-2.2:
   artifacts:
     - "tests/test_foundation.py::test_last_page_boundary_error"
     - "docs/test-cases.md#TC-PAG-002"
-    - "docs/defects-manual-found.md#DEF-002"
+    - "artifacts/defect-manual-reports/defects-manual-found.md#DEF-002"
 
 # URL Management Requirements (from PDF p.1 - Known Issues)
 URL-2.1:
@@ -82,7 +82,7 @@ URL-2.1:
   artifacts:
     - "tests/test_foundation.py::test_direct_url_access_fails"
     - "docs/test-cases.md#TC-NEG-001"
-    - "docs/defects-manual-found.md#DEF-001"
+    - "artifacts/defect-manual-reports/defects-manual-found.md#DEF-001"
 
 URL-2.2:
   desc: "Browser refresh preserves application state"
@@ -93,7 +93,7 @@ URL-2.2:
   tests: []
   defects: ["DEF-004"]
   artifacts:
-    - "docs/defects-manual-found.md#DEF-004"
+    - "artifacts/defect-manual-reports/defects-manual-found.md#DEF-004"
 
 # Negative Testing Requirements
 NEG-1.1:
@@ -150,8 +150,7 @@ ASSIGN-3:
   design: ["DD-9.2"]
   tests: []
   artifacts:
-    - "report/index.html"
-    - "docs/reports/test-report-v0.3.0.html"
+    - "artifacts/qa-reports/index.html"
 
 ASSIGN-4:
   desc: "Browser API calls and assertions"
@@ -183,8 +182,8 @@ ASSIGN-6:
   design: ["DD-8"]
   tests: []
   artifacts:
-    - "docs/defects-manual-found.md"
-    - "docs/images/example-test-failure-screenshot.png"
+    - "artifacts/defect-manual-reports/defects-manual-found.md"
+    - "artifacts/defect-manual-reports/screenshots/example-test-failure-screenshot.png"
 
 ASSIGN-7:
   desc: "CI integration approach documented"

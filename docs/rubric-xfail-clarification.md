@@ -193,4 +193,4 @@ The rubric's interpretation of xfail as "reliability issues" or "implementation 
 - Assignment PDF page 1: Known issues disclosure
 - Test Strategy: xfail Philosophy section
 - Test Implementation: tests/test_foundation.py (xfail markers with defect reasons)
-- Defect Reports: docs/defects-manual-found.md (DEF-001 through DEF-007)
+- Defect Reports: artifacts/defect-manual-reports/defects-manual-found.md (DEF-001 through DEF-007)

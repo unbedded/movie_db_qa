@@ -68,7 +68,7 @@ This report validates that all requirements defined in [`rubric/requirements.yml
 | **ASSIGN-3** | Logging implemented | [logger.py](../../src/movie_db_qa/utils/logger.py) | ✅ |
 | **ASSIGN-4** | API validation | [conftest.py](../../tests/conftest.py#L47-L84) | ✅ |
 | **ASSIGN-5** | CI/CD strategy | [.github/workflows/ci.yml](../../.github/workflows/ci.yml) | ✅ |
-| **ASSIGN-6** | 5+ defects found | [defects-manual-found.md](../../docs/defects-manual-found.md) | ✅ |
+| **ASSIGN-6** | 5+ defects found | [defects-manual-found.md](../../artifacts/defect-manual-reports/defects-manual-found.md) | ✅ |
 | **ASSIGN-7** | Page Object Model | [discover_page.py](../../src/movie_db_qa/pages/discover_page.py) | ✅ |
 | **ASSIGN-8** | All 8 README questions | [README.md](../../README.md) | ✅ |
 
@@ -94,7 +94,7 @@ This report validates that all requirements defined in [`rubric/requirements.yml
 | ASSIGN-3 | PDF p.2 | R-5 | DD-8 | N/A | src/movie_db_qa/utils/logger.py | ✅ |
 | ASSIGN-4 | PDF p.2 | R-5 | DD-7 | N/A | tests/conftest.py (API capture) | ✅ |
 | ASSIGN-5 | PDF p.2 | R-6 | DD-10 | N/A | .github/workflows/ci.yml | ✅ |
-| ASSIGN-6 | PDF p.2 | R-4 | N/A | N/A | docs/defects-manual-found.md (5 defects) | ✅ |
+| ASSIGN-6 | PDF p.2 | R-4 | N/A | N/A | artifacts/defect-manual-reports/defects-manual-found.md (5 defects) | ✅ |
 | ASSIGN-7 | PDF p.2 | R-2 | DD-5 | N/A | src/movie_db_qa/pages/discover_page.py | ✅ |
 | ASSIGN-8 | PDF p.2 | R-3 | N/A | N/A | README.md (8 sections) | ✅ |
 
@@ -161,7 +161,7 @@ This report validates that all requirements defined in [`rubric/requirements.yml
 ## Validation Evidence
 
 ### Source Documents
-- ✅ [Assignment PDF](../../reference/rr_qa_automation_assignment_.pdf) - Explicit requirements
+- ✅ [Assignment PDF](../../docs/reference/rr_qa_automation_assignment_.pdf) - Explicit requirements
 - ✅ [docs/requirements.md](../../docs/requirements.md) - Reverse-engineered from app exploration
 
 ### Implementation Artifacts
@@ -175,7 +175,7 @@ This report validates that all requirements defined in [`rubric/requirements.yml
 ### Reports & Evidence
 - ✅ [report/index.html](../../report/index.html) - HTML test report (pytest-html)
 - ✅ [htmlcov/index.html](../../htmlcov/index.html) - 58% code coverage
-- ✅ [docs/defects-manual-found.md](../../docs/defects-manual-found.md) - 5 defects documented
+- ✅ [artifacts/defect-manual-reports/defects-manual-found.md](../../artifacts/defect-manual-reports/defects-manual-found.md) - 5 defects documented
 - ✅ [.github/workflows/ci.yml](../../.github/workflows/ci.yml) - CI/CD pipeline (passing)
 
 ---
