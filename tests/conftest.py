@@ -138,12 +138,18 @@ def page(context: BrowserContext, request: pytest.FixtureRequest) -> Generator[P
 
     yield page
 
-    # Capture screenshot on test failure
-    if request.node.rep_call.failed if hasattr(request.node, "rep_call") else False:
-        screenshot_name = f"{request.node.name}_{request.node.rep_call.when}.png"
-        screenshot_path = SCREENSHOT_DIR / screenshot_name
-        logger.info("Test failed - capturing screenshot: %s", screenshot_path)
-        page.screenshot(path=str(screenshot_path))
+    # Capture screenshot on test failure (including xfail tests to show actual bug state)
+    if hasattr(request.node, "rep_call"):
+        # Capture for both unexpected failures and expected failures (xfail)
+        # xfail screenshots demonstrate the actual defect behavior
+        if request.node.rep_call.failed or (
+            hasattr(request.node.rep_call, "wasxfail") and request.node.rep_call.wasxfail
+        ):
+            screenshot_name = f"{request.node.name}_{request.node.rep_call.when}.png"
+            screenshot_path = SCREENSHOT_DIR / screenshot_name
+            status = "xfail" if hasattr(request.node.rep_call, "wasxfail") else "failed"
+            logger.info("Test %s - capturing screenshot: %s", status, screenshot_path)
+            page.screenshot(path=str(screenshot_path))
 
     page.close()
 

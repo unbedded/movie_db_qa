@@ -18,7 +18,7 @@ FLT-CAT-1.1:
   design: ["DD-4.1"]
   tests: ["TC-FLT-CAT-001"]
   artifacts:
-    - "tests/test_foundation.py::test_popular_filter_works"
+    - "tests/test_foundation.py::test_tc_flt_cat_001_popular_filter_works"
     - "docs/test-cases.md#TC-FLT-CAT-001"
 
 FLT-CAT-1.2:
@@ -29,7 +29,7 @@ FLT-CAT-1.2:
   design: ["DD-4.1"]
   tests: ["TC-FLT-CAT-002"]
   artifacts:
-    - "tests/test_foundation.py::test_trending_filter_works"
+    - "tests/test_foundation.py::test_tc_flt_cat_002_trending_filter_works"
     - "docs/test-cases.md#TC-FLT-CAT-002"
 
 # Pagination Requirements (from PDF p.1 - Pagination)
@@ -41,7 +41,7 @@ PAG-1.1:
   design: ["DD-4.2"]
   tests: ["TC-PAG-001"]
   artifacts:
-    - "tests/test_foundation.py::test_navigate_to_page_2"
+    - "tests/test_foundation.py::test_tc_pag_001_navigate_to_page_2"
     - "docs/test-cases.md#TC-PAG-001"
 
 PAG-2.1:
@@ -53,7 +53,7 @@ PAG-2.1:
   tests: ["TC-PAG-003"]
   defects: ["DEF-003"]
   artifacts:
-    - "tests/test_foundation.py::test_filter_persistence_across_pagination"
+    - "tests/test_foundation.py::test_tc_pag_003_filter_persists_across_pagination"
     - "docs/test-cases.md#TC-PAG-003"
     - "artifacts/defect-manual-reports/defects-manual-found.md#DEF-003"
 
@@ -66,7 +66,7 @@ PAG-2.2:
   tests: ["TC-PAG-002"]
   defects: ["DEF-002"]
   artifacts:
-    - "tests/test_foundation.py::test_last_page_boundary_error"
+    - "tests/test_foundation.py::test_tc_pag_002_last_page_boundary_error"
     - "docs/test-cases.md#TC-PAG-002"
     - "artifacts/defect-manual-reports/defects-manual-found.md#DEF-002"
 
@@ -80,7 +80,7 @@ URL-2.1:
   tests: ["TC-NEG-001"]
   defects: ["DEF-001"]
   artifacts:
-    - "tests/test_foundation.py::test_direct_url_access_fails"
+    - "tests/test_foundation.py::test_tc_neg_001_direct_url_access_fails"
     - "docs/test-cases.md#TC-NEG-001"
     - "artifacts/defect-manual-reports/defects-manual-found.md#DEF-001"
 
@@ -104,7 +104,7 @@ NEG-1.1:
   design: ["DD-5.2"]
   tests: ["TC-NEG-002"]
   artifacts:
-    - "tests/test_foundation.py::test_invalid_page_number_handling"
+    - "tests/test_foundation.py::test_tc_neg_002_invalid_page_number"
     - "docs/test-cases.md#TC-NEG-002"
 
 # Combined Filter Requirements (Deferred)
@@ -117,7 +117,7 @@ FLT-CMB-1.1:
   tests: ["TC-CMB-001"]
   status: "Deferred - Foundation scope"
   artifacts:
-    - "tests/test_foundation.py::test_popular_plus_movies_filter"
+    - "tests/test_foundation.py::test_tc_cmb_001_popular_movies_combined"
     - "docs/test-cases.md#TC-CMB-001"
 
 # Assignment Meta-Requirements (from PDF p.2)
@@ -172,7 +172,7 @@ ASSIGN-5:
   tests: []
   artifacts:
     - "src/movie_db_qa/utils/logger.py"
-    - "logs/*.log"
+    - "artifacts/logs/*.log"
 
 ASSIGN-6:
   desc: "Test results with attachments and defects"

@@ -1,0 +1,33 @@
+Subject: QA Automation Assignment Submission - movie_db_qa
+
+Dear Rapyuta Robotics Team,
+
+Please find my QA automation assignment submission at:
+https://github.com/unbedded/movie_db_qa
+
+Timeline: ~15-20 hours total effort over several sessions
+
+I leverage AI-augmented workflows (Claude Code) to accelerate development - similar to how modern developers use GitHub Copilot. The key differentiator is what you BUILD with those tools, not the tools themselves.
+
+What sets this submission apart - I went BEYOND the assignment requirements:
+
+- REQUIREMENTS ELICITATION FROM SCRATCH - Most candidates test against provided specs. I reverse-engineered the application behavior, documented 17 requirements in docs/requirements.md, structured them as machine-readable YAML (rubric/requirements.yml), then built full traceability linking requirements → design → tests → artifacts. See artifacts/rubric-reports/req-traceability-report.md for the complete trace matrix.
+- GITFLOW + SEMANTIC VERSIONING - Full release management (CHANGELOG, VERSION, w/ quality commit comments)
+- PRE-COMMIT HOOKS - Quality gates locally enforced (ruff, mypy, black) - actually configured, not aspirational
+- CI/CD PIPELINE - GitHub Actions running full test suite + quality checks on every push (passing ✅)
+- XFAIL TESTS - Auto-capture screenshots of actual defects (not just broken tests)
+- RUBRIC-DRIVEN DEVELOPMENT - Self-evaluation at each phase (artifacts/rubric-reports/ shows 78→84→91→95/100 progression)
+- TODO.md DEVELOPMENT JOURNAL - Complete timeline history showing phase-by-phase progression (v0.1.0 → v1.3.0, 6 phases)
+
+I'm confident in my core coding skills and welcome any pure coding assessment or technical interview to validate my capabilities.
+
+Where to start:
+- artifacts/qa-reports/index.html - Test execution results
+- artifacts/rubric-reports/phase6-rubric-eval.md - Self-evaluation (95/100)
+- All git branches preserved on remote for evaluation transparency
+
+Thank you for the opportunity. I look forward to discussing this work and demonstrating my QA automation expertise.
+
+Best regards,
+ Spencer Barrett
+
