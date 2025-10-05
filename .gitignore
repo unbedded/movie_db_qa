@@ -209,7 +209,7 @@ __marimo__/
 
 # Project-specific
 .claude/
-CLAUDE.md
+# CLAUDE.md - removed from ignore, needs to be tracked
 
 # CI debugging artifacts
 tests/github_ci_errors/
