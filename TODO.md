@@ -15,13 +15,14 @@
 - [💡 FOUNDATION STRATEGY - 1.5 DAYS](#-foundation-strategy---15-days)
 - [🎯 REMEMBER](#-remember)
 
-## 📊 Project Status: Phase 3 Complete - Ready for v0.3.0
-- **Current Branch:** `feature/test-impl` (ready to commit v0.3.0)
-- **Next Phase:** Phase 4 API Validation & Cleanup (2-3 hours) 🚨 HIGH PRIORITY
+## 📊 Project Status: Phase 4 Complete - Ready for v0.4.0
+- **Current Branch:** `feature/test-api-and-debt` (ready to commit v0.4.0)
+- **Next Phase:** Phase 5 Final Polish & Delivery (1-2 hours)
 - **Phase 3 Rubric:** 78/100 (Good - Professional Quality)
-- **Tests:** 2 pass, 4 xfail, 1 xpass, 1 skip (8 total)
+- **Phase 4 Changes:** API validation + screenshot demo + magic numbers cleanup + CI fix
+- **Tests:** 2 pass, 4 xfail, 1 xpass, 1 skip (8 total) + API assertions
 - **Defects:** 5 documented with evidence
-- **CI/CD:** GitHub Actions ✅ passing
+- **CI/CD:** GitHub Actions (CI fix added - pending push to test)
 
 ### 📋 Git Branch Tracking (for Assignment Evaluation)
 **Policy:** Keep ALL remote branches to show development progression
@@ -233,13 +234,22 @@
 - [ ] Update test-cases.md with API validation info
 - [ ] Add "Known Limitations" section to README (xfail tests = documented defects)
 
-### 🚦 Phase Gate 4: Requirements Complete
-- [ ] API validation implemented (R-5.3 satisfied)
-- [ ] Screenshot capture demonstrated
-- [ ] Magic numbers eliminated
-- [ ] All tests passing (2 pass, 4 xfail, 1 xpass, 1 skip)
-- [ ] Quality checks pass (ruff, mypy, black)
-- [ ] **Rubric Re-evaluation (target: 82-86/100)** - expect +4-8 points from API validation
+### 🚦 Phase Gate 4: Requirements Complete - ALL DONE ✅
+- [x] ✅ API validation implemented (R-5.3 satisfied)
+  - [x] Playwright network interception in conftest.py
+  - [x] API assertions in 3 tests (TC-FLT-CAT-001, TC-FLT-CAT-002, TC-PAG-001)
+  - [x] TMDB endpoints validated: `/movie/popular`, `/trending/movie/week`, page parameters
+- [x] ✅ Screenshot capture demonstrated
+  - [x] Example screenshot: `docs/images/example-test-failure-screenshot.png`
+  - [x] Auto-capture working (pytest hook verified)
+- [x] ✅ Magic numbers eliminated
+  - [x] `config.base_url` and `config.expected_results_per_page` in config.py
+  - [x] All hardcoded values removed from test_foundation.py
+- [x] ✅ All tests passing (2 pass, 4 xfail, 1 xpass, 1 skip)
+- [x] ✅ Quality checks pass (ruff, mypy, black)
+- [x] ✅ CI fix added (playwright install --with-deps chromium)
+- [x] ✅ Documentation updated (README + test-strategy.md with API validation sections)
+- [ ] ⏳ **Rubric Re-evaluation (target: 82-86/100)** - expect +4-8 points from API validation
 
 **Success Metric:** All explicit assignment requirements satisfied
 

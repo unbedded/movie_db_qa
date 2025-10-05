@@ -14,6 +14,7 @@ class TestConfig:
         headless: Run browser in headless mode
         timeout: Default timeout in milliseconds
         slow_mo: Slow down operations by milliseconds (for debugging)
+        expected_results_per_page: Expected number of results per page
     """
 
     base_url: str = "https://tmdb-discover.surge.sh"
@@ -21,6 +22,7 @@ class TestConfig:
     headless: bool = True
     timeout: int = 30000  # 30 seconds
     slow_mo: int = 0  # No slowdown by default
+    expected_results_per_page: int = 20  # TMDB shows 20 results per page
 
     @classmethod
     def from_env(cls) -> "TestConfig":

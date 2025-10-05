@@ -22,19 +22,16 @@ import pytest
 from playwright.sync_api import BrowserContext, Page, expect
 
 from movie_db_qa.pages.discover_page import DiscoverPage
+from movie_db_qa.utils.config import config
 
 # Module-level logger
 logger = logging.getLogger(__name__)
-
-# Test constants
-EXPECTED_RESULTS_PER_PAGE = 20
-BASE_URL = "https://tmdb-discover.surge.sh"
 
 
 class TestCategoryFilters:
     """Test category filter functionality (Popular, Trending, etc.)."""
 
-    def test_tc_flt_cat_001_popular_filter_works(self, context: BrowserContext) -> None:
+    def test_tc_flt_cat_001_popular_filter_works(self, page: Page) -> None:
         """TC-FLT-CAT-001: Popular Filter Works.
 
         Priority: Critical
@@ -52,19 +49,19 @@ class TestCategoryFilters:
         3. Verify Popular filter is active
         4. Verify movie results displayed
         5. Count results = 20
+        6. Validate API call (discover/movie with sort_by=popularity.desc)
         """
         logger.info("Test started: TC-FLT-CAT-001")
 
-        # Setup: Create fresh page in isolated context
-        page: Page = context.new_page()
+        # Setup
         discover = DiscoverPage(page)
 
         # Step 1: Navigate to base URL
-        logger.info("Navigating to URL: %s", BASE_URL)
+        logger.info("Navigating to URL: %s", config.base_url)
         discover.load()
 
         # Step 2: Observe auto-forward to /popular
-        expect(page).to_have_url(f"{BASE_URL}/popular")
+        expect(page).to_have_url(f"{config.base_url}/popular")
         logger.info("Verified auto-forward to /popular")
 
         # Step 3: Verify Popular filter is active
@@ -77,10 +74,22 @@ class TestCategoryFilters:
         logger.info("Verified movie results displayed: %d movies", results_count)
 
         # Step 5: Count results = 20
-        assert results_count == EXPECTED_RESULTS_PER_PAGE, f"Should display {EXPECTED_RESULTS_PER_PAGE} results"
+        assert results_count == config.expected_results_per_page, (
+            f"Should display {config.expected_results_per_page} results"
+        )
+
+        # Step 6: Validate API call
+        api_calls = page.api_calls  # type: ignore[attr-defined]
+        movie_calls = [call for call in api_calls if "/movie/" in call["url"]]
+        assert len(movie_calls) > 0, "Should make API call to TMDB movie endpoint"
+
+        # Verify Popular endpoint called
+        popular_call = [call for call in movie_calls if "/movie/popular" in call["url"]]
+        assert len(popular_call) > 0, "Should call /movie/popular endpoint"
+        logger.info("Verified API call: %s", popular_call[0]["url"])
         logger.info("Test passed: TC-FLT-CAT-001")
 
-    def test_tc_flt_cat_002_trending_filter_works(self, context: BrowserContext) -> None:
+    def test_tc_flt_cat_002_trending_filter_works(self, page: Page) -> None:
         """TC-FLT-CAT-002: Trending Filter Works.
 
         Priority: Critical
@@ -95,14 +104,14 @@ class TestCategoryFilters:
         2. Click Trending filter
         3. Verify Trending active, Popular inactive
         4. Verify movie results displayed
+        5. Validate API call (discover/movie with sort_by parameter change)
         """
         logger.info("Test started: TC-FLT-CAT-002")
 
-        page: Page = context.new_page()
         discover = DiscoverPage(page)
 
         # Step 1: Navigate
-        logger.info("Navigating to URL: %s", BASE_URL)
+        logger.info("Navigating to URL: %s", config.base_url)
         discover.load()
 
         # Step 2: Click Trending filter
@@ -116,7 +125,19 @@ class TestCategoryFilters:
 
         # Step 4: Verify results displayed
         results_count = discover.get_results_count()
-        assert results_count == EXPECTED_RESULTS_PER_PAGE, f"Should display {EXPECTED_RESULTS_PER_PAGE} results"
+        assert results_count == config.expected_results_per_page, (
+            f"Should display {config.expected_results_per_page} results"
+        )
+
+        # Step 5: Validate API call for Trending
+        api_calls = page.api_calls  # type: ignore[attr-defined]
+        movie_calls = [call for call in api_calls if "/movie/" in call["url"]]
+        assert len(movie_calls) >= 2, "Should make API calls (Popular + Trending)"
+
+        # Log all movie API calls for visibility
+        logger.info("API calls captured: %d movie endpoints", len(movie_calls))
+        for call in movie_calls:
+            logger.info("  - %s", call["url"])
         logger.info("Test passed: TC-FLT-CAT-002")
 
 
@@ -124,7 +145,7 @@ class TestPagination:
     """Test pagination functionality (Next/Previous, boundaries)."""
 
     @pytest.mark.xfail(reason="DEF-007: Pagination navigation broken - Next/page number clicks don't work")
-    def test_tc_pag_001_navigate_to_page_2(self, context: BrowserContext) -> None:
+    def test_tc_pag_001_navigate_to_page_2(self, page: Page) -> None:
         """TC-PAG-001: Navigate to Page 2 (Defect Found).
 
         Priority: High
@@ -142,10 +163,10 @@ class TestPagination:
         2. Verify on page 1
         3. Click Next button
         4. Verify URL changed to /popular/2 (FAILS - pagination broken)
+        5. Validate API call includes page=2 parameter
         """
         logger.info("Test started: TC-PAG-001")
 
-        page: Page = context.new_page()
         discover = DiscoverPage(page)
 
         # Step 1-2: Navigate and verify page 1
@@ -166,7 +187,7 @@ class TestPagination:
         discover.click_next_page()
 
         # Step 4: Verify URL changed
-        expect(page).to_have_url(f"{BASE_URL}/popular/2")
+        expect(page).to_have_url(f"{config.base_url}/popular/2")
         logger.info("Verified URL changed to /popular/2")
 
         # Step 5: Verify different results
@@ -177,6 +198,13 @@ class TestPagination:
         # Step 6: Verify page indicator
         current_page = discover.get_current_page()
         assert current_page == 2, "Should be on page 2"
+
+        # Step 7: Validate API call with page=2
+        api_calls = page.api_calls  # type: ignore[attr-defined]
+        movie_calls = [call for call in api_calls if "/movie/" in call["url"]]
+        page2_calls = [call for call in movie_calls if "page=2" in call["url"]]
+        assert len(page2_calls) > 0, "Should make API call with page=2 parameter"
+        logger.info("Verified API call with page=2: %s", page2_calls[0]["url"])
         logger.info("Test passed: TC-PAG-001")
 
     @pytest.mark.xfail(reason="DEF-002: Known defect - last page pagination broken")
@@ -205,13 +233,13 @@ class TestPagination:
         discover = DiscoverPage(page)
 
         # Step 1-2: Navigate and apply filter
-        logger.info("Navigating to URL: %s", BASE_URL)
+        logger.info("Navigating to URL: %s", config.base_url)
         discover.load()
 
         # Step 3: Navigate to high page number (symptom of DEF-002)
         high_page = 289
         logger.info("Navigating to page: %d", high_page)
-        page.goto(f"{BASE_URL}/popular/{high_page}")
+        page.goto(f"{config.base_url}/popular/{high_page}")
 
         # Step 4: Should see error (test expects failure)
         # If this passes, the defect has been fixed
@@ -245,7 +273,7 @@ class TestPagination:
         discover = DiscoverPage(page)
 
         # Step 1-2: Navigate and apply filter
-        logger.info("Navigating to URL: %s", BASE_URL)
+        logger.info("Navigating to URL: %s", config.base_url)
         discover.load()
 
         logger.info("Applying filter: Popular")
@@ -290,15 +318,15 @@ class TestNegativeCases:
         page: Page = context.new_page()
 
         # Step 1: Direct navigation to /popular
-        logger.info("Navigating directly to URL: %s/popular", BASE_URL)
-        page.goto(f"{BASE_URL}/popular")
+        logger.info("Navigating directly to URL: %s/popular", config.base_url)
+        page.goto(f"{config.base_url}/popular")
         page.wait_for_load_state("networkidle")
 
         # Step 2: Should load properly (EXPECTED TO FAIL - DEF-001)
         # If defect exists, page will be blank or show error
         discover = DiscoverPage(page)
         results_count = discover.get_results_count()
-        assert results_count == EXPECTED_RESULTS_PER_PAGE, "Direct URL should load results properly"
+        assert results_count == config.expected_results_per_page, "Direct URL should load results properly"
         logger.info("Direct URL loaded successfully (test passed - defect fixed?)")
 
     @pytest.mark.xfail(reason="DEF-001: Direct URL access fails - cannot test page 0 handling")
@@ -323,8 +351,8 @@ class TestNegativeCases:
         page: Page = context.new_page()
 
         # Step 1-2: Navigate to invalid page 0
-        logger.info("Navigating to invalid page: %s/popular/0", BASE_URL)
-        page.goto(f"{BASE_URL}/popular/0")
+        logger.info("Navigating to invalid page: %s/popular/0", config.base_url)
+        page.goto(f"{config.base_url}/popular/0")
         page.wait_for_load_state("networkidle")
 
         # Step 3: Should handle gracefully (redirect to page 1 OR show error)

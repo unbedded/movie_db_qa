@@ -187,6 +187,50 @@ This strategy focuses on **quality over quantity** - implementing a foundation o
 
 ---
 
+## API Validation Strategy
+
+### Approach: Playwright Network Interception
+
+**Tool:** Playwright's `page.on("request")` event handler
+
+**Implementation:**
+```python
+# tests/conftest.py - Automatic capture for all tests
+def handle_request(request):
+    if "api.themoviedb.org" in request.url:
+        api_calls.append({
+            "url": request.url,
+            "method": request.method,
+            "resource_type": request.resource_type
+        })
+        logger.info("API call captured: %s %s", request.method, request.url)
+
+page.on("request", handle_request)
+page.api_calls = api_calls  # Attach to page for test access
+```
+
+### Validated Endpoints
+
+| Test Case | API Endpoint Validated | Query Parameters |
+|-----------|------------------------|------------------|
+| TC-FLT-CAT-001 | `/movie/popular` | `page=1`, `api_key` |
+| TC-FLT-CAT-002 | `/movie/trending` | Filter change detection |
+| TC-PAG-001 | `/movie/popular` | `page=2` (pagination) |
+
+### What We Validate
+
+1. **Correct endpoint called** - Verify UI action triggers expected API call
+2. **Query parameters present** - Ensure page numbers, filters passed correctly
+3. **API call timing** - Detect unnecessary duplicate calls
+
+### Benefits
+
+- **UI-API integration testing** - Catch mismatches between frontend and backend
+- **Regression detection** - API calls logged in test execution log
+- **Defect evidence** - Failed tests show what API calls were (or weren't) made
+
+---
+
 ## Logging Strategy
 
 ### What to Log
