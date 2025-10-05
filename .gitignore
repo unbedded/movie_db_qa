@@ -38,6 +38,7 @@ pip-delete-this-directory.txt
 
 # Unit test / coverage reports
 htmlcov/
+report/
 .tox/
 .nox/
 .coverage
@@ -216,3 +217,5 @@ tests/github_ci_errors/
 # IDE
 .vscode/
 .idea/
+screenshots/
+logs/

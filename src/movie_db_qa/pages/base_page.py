@@ -1,5 +1,7 @@
 """Base page object with common interactions for all pages."""
 
+import logging
+
 from playwright.sync_api import Page
 
 
@@ -16,6 +18,8 @@ class BasePage:
         Args:
             page: Playwright page instance
         """
+        # CLAUDE.md: Instantiate logging as first step in constructor
+        self.logger = logging.getLogger(self.__class__.__name__)
         self.page = page
 
     def navigate_to(self, url: str) -> None:

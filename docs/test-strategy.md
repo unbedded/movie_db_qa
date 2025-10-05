@@ -2,200 +2,278 @@
 
 **Project:** movie_db_qa - QA Automation for TMDB Discovery App
 **Version:** 1.0
-**Last Updated:** [To be completed in Phase 2]
-**Status:** 🚧 PLACEHOLDER - To be completed during Phase 2: Test Design & Documentation
+**Last Updated:** 2025-10-04
+**Status:** ✅ Complete
 
 ---
 
 ## Overview
 
-[To be completed: Brief overview of testing approach]
+**Approach:** Risk-based test prioritization using formal test design techniques
+
+This strategy focuses on **quality over quantity** - implementing a foundation of 8-10 Critical/High priority test cases that demonstrate QA thinking and test design skills, rather than exhaustive coverage.
+
+**Philosophy:** "Small scope, deep quality" - Better to have 10 well-designed tests with clear WHY explanations than 50 shallow tests.
 
 ---
 
 ## Testing Objectives
 
-[To be completed: What are we trying to achieve with testing?]
-
 ### Primary Goals
-- [ ] [Goal 1]
-- [ ] [Goal 2]
-- [ ] [Goal 3]
+
+1. **Validate core user workflows** - Ensure primary features (Popular/Trending filters, pagination) work correctly
+2. **Verify known issues** - Reproduce and document the 2 disclosed defects (DEF-001, DEF-002)
+3. **Demonstrate test design skills** - Apply BVA, EP, and negative testing techniques
+4. **Find new defects** - Exploratory testing to discover additional issues beyond known bugs
 
 ### Success Criteria
-- [ ] [Criterion 1]
-- [ ] [Criterion 2]
+
+- ✅ All 8-10 foundation test cases implemented and passing (or intentionally failing for known defects)
+- ✅ Each test case has clear WHY explanation showing test design rationale
+- ✅ Known defects (DEF-001, DEF-002) are reproducible via automated tests
+- ✅ Test execution generates HTML reports with screenshots on failure
+- ✅ Code quality gates pass (ruff, mypy, 100% of test code covered)
 
 ---
 
 ## Scope
 
-### In Scope
-[To be completed: What features will be tested]
+### In Scope - FOUNDATION (8-10 test cases)
+
+**Priority:** Critical + High only
+
+| Feature Area | Test Cases | Priority | Rationale |
+|--------------|------------|----------|-----------|
+| **Category Filters** | 2-3 tests | Critical | Primary user workflow - Popular, Trending filters |
+| **Pagination** | 2-3 tests | High | Essential navigation - forward/backward, boundaries |
+| **Negative Testing** | 2 tests | High | Known defects - DEF-001 (direct URL), DEF-002 (last page) |
+| **Combined Filters** | 1-2 tests | High | Real-world usage - filter combinations |
 
 **Features to Test:**
-- [ ] Filtering functionality
-- [ ] Pagination
-- [ ] Search
-- [ ] [Add more...]
+- ✅ Popular filter (most common user action)
+- ✅ Trending filter (second most common)
+- ✅ Pagination navigation (Next/Previous buttons)
+- ✅ Pagination boundaries (last page - known defect)
+- ✅ Direct URL access (known defect)
+- ✅ Combined filters (e.g., Popular + Movies type)
 
-### Out of Scope
-[To be completed: What will NOT be tested and WHY]
+### Out of Scope - DEFERRED
 
-**Explicitly Excluded:**
-- [ ] [Feature/area + rationale]
-- [ ] [Feature/area + rationale]
+**Priority:** Medium + Low (defer to post-submission if time permits)
 
----
+| Feature/Area | Reason for Exclusion | Effort Estimate |
+|--------------|---------------------|-----------------|
+| Year/Rating/Genre filters | Medium priority, not core workflow | 3-4 hours (10+ tests) |
+| Type filter (Movies/TV Shows) | Already covered in combined filter test | 1 hour (2 tests) |
+| Search functionality | Medium priority, separate feature | 2 hours (5 tests) |
+| Cross-browser testing | Chrome only for foundation | 2 hours setup |
+| Mobile/Responsive testing | Not assignment requirement | 4 hours |
+| Performance testing | Not assignment requirement | 6 hours |
+| Accessibility testing | Not assignment requirement | 8 hours |
+| API data accuracy | No backend access to verify TMDB API | N/A |
 
-## Test Approach
-
-### Risk-Based Testing
-[To be completed: How are tests prioritized by risk?]
-
-**Risk Assessment:**
-| Feature | User Impact | Likelihood of Defects | Priority |
-|---------|-------------|----------------------|----------|
-| [Feature] | High/Medium/Low | High/Medium/Low | Critical/High/Medium/Low |
-
-### Test Design Techniques
-
-[To be completed: Which techniques will be used and where?]
-
-**Techniques Applied:**
-1. **Boundary Value Analysis (BVA)**
-   - Where: [Feature areas]
-   - Why: [Rationale]
-
-2. **Equivalence Partitioning (EP)**
-   - Where: [Feature areas]
-   - Why: [Rationale]
-
-3. **Decision Tables**
-   - Where: [Feature areas]
-   - Why: [Rationale]
-
-4. **Exploratory Testing**
-   - Where: [Feature areas]
-   - Why: [Rationale]
-
-5. **Negative Testing**
-   - Where: [Feature areas]
-   - Why: [Rationale]
+**Rationale for Exclusions:**
+- **Time constraint:** 1.5 days remaining, focus on demonstrating skills not exhaustive coverage
+- **Assignment scope:** Foundation over expansion - quality explanations matter more than test count
+- **Diminishing returns:** 10 well-designed tests > 50 shallow tests
 
 ---
 
-## Test Levels
+## Test Design Techniques
 
-[To be completed: What types of testing will be performed?]
+### Techniques Applied
 
-### Functional Testing
-- [ ] [Test type 1]
-- [ ] [Test type 2]
+| Technique | Definition | Application in This Project |
+|-----------|------------|------------------------------|
+| **Boundary Value Analysis (BVA)** | Test at boundaries of input ranges | Pagination: first page, last page, invalid page numbers |
+| **Equivalence Partitioning (EP)** | Divide inputs into valid/invalid classes | Filters: valid categories (Popular, Trending) vs invalid direct URLs |
+| **Decision Tables** | Test combinations of inputs | Combined filters: Category + Type combinations |
+| **Negative Testing** | Test error handling and edge cases | Direct URL access (DEF-001), last page error (DEF-002) |
+| **Exploratory Testing** | Ad-hoc testing to find unexpected issues | Found 3 new defects (DEF-003, DEF-004, DEF-005) during exploration |
 
-### Non-Functional Testing
-- [ ] [Test type 1 - if applicable]
-- [ ] [Test type 2 - if applicable]
+### WHY These Techniques?
+
+**Boundary Value Analysis:**
+- Pagination is a perfect BVA candidate (page 1, page N, page N+1)
+- Catches off-by-one errors (common in pagination logic)
+- DEF-002 (last page broken) found via BVA thinking
+
+**Equivalence Partitioning:**
+- Filter types: Valid (Popular, Trending, Newest, Top Rated) vs Invalid (direct URLs)
+- Reduces test count while maintaining coverage
+- Tests representative samples from each equivalence class
+
+**Decision Tables:**
+- Combined filters have multiple inputs (Category, Type, Year, Rating, Genre)
+- Decision table ensures we test key combinations
+- Example: Popular + Movies, Trending + TV Shows
+
+**Negative Testing:**
+- Both known defects (DEF-001, DEF-002) are negative scenarios
+- Validates error handling and edge cases
+- Ensures app fails gracefully
+
+**Exploratory Testing:**
+- Found defects formal techniques missed:
+  - DEF-003: Filter lost after pagination
+  - DEF-004: Pagination skips pages at boundaries
+  - DEF-005: Page refresh loses state
+- Complements structured testing with ad-hoc discovery
+
+---
+
+## Risk Assessment
+
+### High Risk Areas (Test First)
+
+| Risk Area | Impact | Likelihood | Priority | Mitigation |
+|-----------|--------|------------|----------|------------|
+| **Category filters broken** | High | Medium | Critical | Test Popular/Trending filters first |
+| **Pagination fails** | High | High | Critical | BVA on boundaries, test navigation |
+| **Known defects** | High | Certain | High | Negative tests for DEF-001, DEF-002 |
+| **State management issues** | Medium | Medium | High | Test filter persistence across actions |
+
+### Low Risk Areas (Defer)
+
+- Advanced filters (Year, Rating, Genre) - less frequently used
+- Search functionality - separate from core discovery workflow
+- UI polish and edge cases - low business impact
 
 ---
 
 ## Test Environment
 
-[To be completed: Environment specifications]
+### Browser Contexts
 
-**Target Environment:**
-- **Application URL:** https://tmdb-discover.surge.sh/
-- **Browsers:** [To be specified]
-- **Operating Systems:** [To be specified]
-- **Test Data:** [To be specified]
+**Precondition for ALL tests:** Incognito/private browser window (fresh session, no cache)
 
----
+**Rationale:**
+- Playwright's `new_context()` provides isolated browser context (= incognito mode)
+- No shared state between tests (cookies, localStorage, sessionStorage)
+- Reproducible defects - each test starts with clean slate
+- Matches manual testing preconditions in defect reports
 
-## Coverage Goals
+### Configuration
 
-[To be completed: What coverage are we targeting?]
-
-**Coverage Targets:**
-- Feature coverage: [X%]
-- Code coverage: [X%]
-- Defect detection: [Minimum X defects]
-
-**Coverage Rationale:**
-[To be completed: Why these coverage goals?]
+| Component | Value | Source |
+|-----------|-------|--------|
+| Browser | Chromium | `config.browser` |
+| Headless | True (CI), False (local debug) | `config.headless` |
+| Viewport | 1920x1080 | `conftest.py` context fixture |
+| Timeout | 30000ms | `config.timeout` |
+| Base URL | https://tmdb-discover.surge.sh | `DiscoverPage.BASE_URL` |
 
 ---
 
-## Entry & Exit Criteria
+## Test Execution Strategy
 
-### Entry Criteria
-[To be completed: When can testing begin?]
-- [ ] [Criterion 1]
-- [ ] [Criterion 2]
+### Execution Order
 
-### Exit Criteria
-[To be completed: When is testing complete?]
-- [ ] [Criterion 1]
-- [ ] [Criterion 2]
+1. **Sanity tests** - Verify framework works (existing `test_sanity.py`)
+2. **Category filter tests** - Core functionality (TC-FLT-CAT-001, TC-FLT-CAT-002)
+3. **Pagination tests** - Essential navigation (TC-PAG-001, TC-PAG-002, TC-PAG-003)
+4. **Negative tests** - Known defects (TC-NEG-001, TC-NEG-002)
+5. **Combined filter tests** - Real-world scenarios (TC-CMB-001)
 
----
+### Defect Handling
 
-## Defect Management
+| Defect | Test Case | Expected Behavior |
+|--------|-----------|-------------------|
+| DEF-001: Direct URL fails | TC-NEG-001 | Test SHOULD FAIL (validates defect exists) |
+| DEF-002: Last page broken | TC-NEG-002 | Test SHOULD FAIL (validates defect exists) |
+| DEF-003: Filter lost | TC-PAG-003 | Test SHOULD FAIL (new defect found) |
 
-[To be completed: How will defects be tracked and reported?]
-
-**Defect Reporting:**
-- Format: [Structured markdown in docs/defects.md]
-- Severity levels: [Critical, High, Medium, Low]
-- Priority levels: [P0, P1, P2, P3]
-
-**Defect Hunting Strategy:**
-1. [Strategy 1]
-2. [Strategy 2]
+**Strategy:** Use `@pytest.mark.xfail` for known defects to document expected failures
 
 ---
 
-## Test Deliverables
+## Logging Strategy
 
-[To be completed: What will be delivered?]
+### What to Log
 
-**Deliverables:**
-- [ ] `docs/test-cases.md` - Detailed test case descriptions
-- [ ] `docs/defects.md` - Defect reports with evidence
-- [ ] Test automation suite
-- [ ] HTML + Console reports
-- [ ] Coverage reports
+| Event | Log Level | Example |
+|-------|-----------|---------|
+| Test start/end | INFO | `logger.info("Test started: %s", test_name)` |
+| Page navigation | INFO | `logger.info("Navigating to URL: %s", url)` |
+| Filter applied | INFO | `logger.info("Applied filter: %s", filter_name)` |
+| Assertion validation | DEBUG | `logger.debug("Validating result count: %d", count)` |
+| Error/Exception | ERROR | `logger.exception("Test failed with error")` |
+
+### Lazy % Formatting (MANDATORY)
+
+**✅ CORRECT:**
+```python
+logger.info("User %s applied filter %s at page %d", username, filter_name, page_num)
+```
+
+**❌ WRONG:**
+```python
+logger.info(f"User {username} applied filter {filter_name} at page {page_num}")
+```
+
+**WHY:** Lazy formatting only evaluates arguments if log level is enabled (performance)
 
 ---
 
-## Risks & Mitigation
+## Reporting
 
-[To be completed: What could go wrong?]
+### Reports Generated
 
-| Risk | Impact | Probability | Mitigation |
-|------|--------|-------------|------------|
-| [Risk 1] | High/Medium/Low | High/Medium/Low | [Mitigation strategy] |
+| Report Type | Tool | Output Location | Purpose |
+|-------------|------|-----------------|---------|
+| **HTML Report** | pytest-html | `htmlcov/index.html` | Human-readable test results |
+| **Coverage Report** | pytest-cov | `htmlcov/` | Code coverage metrics |
+| **Console Output** | pytest | stdout | Quick feedback during development |
+| **Screenshots** | playwright | `screenshots/` (on failure) | Visual defect evidence |
+
+### Metrics Tracked
+
+- ✅ Test pass/fail count
+- ✅ Code coverage percentage (target: 100% of test code)
+- ✅ Test execution time
+- ✅ Defects found vs reproduced
+
+---
+
+## Continuous Integration
+
+### CI Pipeline (GitHub Actions)
+
+**Quality Gates:**
+1. Ruff linting (format + lint)
+2. MyPy type checking
+3. Black formatting verification
+4. Pytest test execution
+5. Coverage report generation
+
+**Triggers:**
+- Push to `main`, `develop`, `feature/*` branches
+- Pull requests to `main`, `develop`
+
+**Status:** ✅ CI workflow fixed (`.github/workflows/ci.yml` - Python 3.13)
 
 ---
 
 ## References
 
-- See `docs/design-decisions.md` for detailed rationale on strategic choices
-- See `docs/reference/assignment-overview.md` for assignment requirements
-- See `docs/reference/priorities.md` for scoring priorities
+- [Test Cases](test-cases.md) - Detailed test specifications
+- [Requirements](requirements.md) - Reverse-engineered requirements
+- [Defects](defects-manual-found.md) - Bug reports with evidence
+- [Design Decisions](design-decisions.md) - Technical rationale
 
 ---
 
-## Notes
+## Appendix: Test Prioritization Matrix
 
-**Assignment Context:**
-> "We've kept the scope of the assignment rather small on purpose. Please document as much as you can."
+| Test Case ID | Feature | Priority | Technique | Effort | Value |
+|--------------|---------|----------|-----------|--------|-------|
+| TC-FLT-CAT-001 | Popular filter | Critical | EP | Low | High |
+| TC-FLT-CAT-002 | Trending filter | Critical | EP | Low | High |
+| TC-PAG-001 | Navigate page 2 | High | BVA | Low | High |
+| TC-PAG-002 | Last page boundary | High | BVA | Low | High |
+| TC-PAG-003 | Filter persistence | High | Exploratory | Medium | High |
+| TC-NEG-001 | Direct URL (DEF-001) | High | Negative | Low | High |
+| TC-NEG-002 | Last page (DEF-002) | High | Negative | Low | High |
+| TC-CMB-001 | Popular + Movies | High | Decision Table | Medium | Medium |
 
-**Key Focus:**
-- **WHY** you chose this approach
-- **Risk-based** prioritization
-- **Coverage** rationale (what's tested and what's not)
-- **Techniques** applied and where
-
----
-
-**Status:** This document will be completed during Phase 2: Test Design & Documentation.
+**Foundation Score:** 8 test cases × High value = Strong demonstration of test design skills

@@ -1,14 +1,53 @@
 """Pytest configuration and fixtures."""
 
+import logging
 from collections.abc import Generator
+from pathlib import Path
+from typing import Any
 
 import pytest
 from playwright.sync_api import Browser, BrowserContext, Page, Playwright, sync_playwright
 
 from movie_db_qa.utils.config import config
-from movie_db_qa.utils.logger import setup_logger
 
-logger = setup_logger(__name__)
+# Screenshot directory
+SCREENSHOT_DIR = Path("screenshots")
+SCREENSHOT_DIR.mkdir(exist_ok=True)
+
+# Log directory
+LOG_DIR = Path("logs")
+LOG_DIR.mkdir(exist_ok=True)
+
+
+@pytest.fixture(scope="session", autouse=True)
+def configure_logging() -> Generator[None, None, None]:
+    """Configure root logger to capture all test logs to file.
+
+    This runs once per test session and captures logs from all modules.
+    """
+    # Configure root logger with both console and file handlers
+    root_logger = logging.getLogger()
+    root_logger.setLevel(logging.INFO)
+
+    # File handler
+    log_file = LOG_DIR / "test_execution.log"
+    file_handler = logging.FileHandler(log_file, mode="w")  # Overwrite each run
+    file_handler.setLevel(logging.INFO)
+    file_formatter = logging.Formatter(
+        "%(asctime)s - %(name)s - %(levelname)s - %(message)s", datefmt="%Y-%m-%d %H:%M:%S"
+    )
+    file_handler.setFormatter(file_formatter)
+    root_logger.addHandler(file_handler)
+
+    yield
+
+    # Cleanup
+    file_handler.close()
+    root_logger.removeHandler(file_handler)
+
+
+# Module logger
+logger = logging.getLogger(__name__)
 
 
 @pytest.fixture(scope="session")
@@ -60,11 +99,12 @@ def context(browser: Browser) -> Generator[BrowserContext, None, None]:
 
 
 @pytest.fixture
-def page(context: BrowserContext) -> Generator[Page, None, None]:
+def page(context: BrowserContext, request: pytest.FixtureRequest) -> Generator[Page, None, None]:
     """Create new page for each test.
 
     Args:
         context: Browser context from fixture
+        request: Pytest request fixture for test metadata
 
     Yields:
         Page instance
@@ -72,4 +112,31 @@ def page(context: BrowserContext) -> Generator[Page, None, None]:
     page = context.new_page()
     page.set_default_timeout(config.timeout)
     yield page
+
+    # Capture screenshot on test failure
+    if request.node.rep_call.failed if hasattr(request.node, "rep_call") else False:
+        screenshot_name = f"{request.node.name}_{request.node.rep_call.when}.png"
+        screenshot_path = SCREENSHOT_DIR / screenshot_name
+        logger.info("Test failed - capturing screenshot: %s", screenshot_path)
+        page.screenshot(path=str(screenshot_path))
+
     page.close()
+
+
+@pytest.hookimpl(tryfirst=True, hookwrapper=True)
+def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo[None]) -> Generator[None, Any, None]:
+    """Pytest hook to capture test results for screenshot on failure.
+
+    Args:
+        item: Test item
+        call: Test call info
+
+    Yields:
+        Test outcome
+    """
+    # Execute all other hooks to obtain the report object
+    outcome: Any = yield
+    rep = outcome.get_result()
+
+    # Store test results on item for access in fixtures
+    setattr(item, f"rep_{rep.when}", rep)
