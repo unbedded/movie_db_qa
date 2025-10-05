@@ -31,7 +31,6 @@ class TestConfig:
         Returns:
             TestConfig instance with values from env vars or defaults
         """
-        # TODO: Phase 3 - Add environment variable support
         return cls()
 
 

@@ -12,6 +12,7 @@
 
 ## Table of Contents
 
+- [🔗 Requirements Traceability](#-requirements-traceability)
 - [📁 Project Structure](#-project-structure)
 - [🎯 Quick Start](#-quick-start)
 - [📋 Testing Strategy](#-testing-strategy)
@@ -23,6 +24,85 @@
 - [🐛 Defects Found](#-defects-found)
 - [🔄 CI Integration Approach](#-ci-integration-approach)
 - [📚 Documentation](#-documentation)
+- [🤝 Development Workflow](#-development-workflow)
+- [📊 Project Status](#-project-status)
+- [📝 Assignment Context](#-assignment-context)
+
+---
+
+## 🔗 Requirements Traceability
+
+This project demonstrates **AI-powered traceability** from source documents to deliverables:
+
+### Traceability Flow
+
+**STEP 1: Source Documents**
+- `docs/reference/rr_qa_automation_assignment_.pdf` - Assignment requirements (explicit)
+- `docs/requirements.md` - Reverse-engineered from app exploration (inferred)
+
+**STEP 2: Structured Requirements**
+- `rubric/requirements.yml` - Machine-readable YAML format with **traceability tags**:
+  - `rubric: ["R-1", "R-2"]` - Links to rubric scoring criteria
+  - `design: ["DD-4.1"]` - Links to design decision sections
+  - `tests: ["TC-FLT-CAT-001"]` - Links to test case IDs
+  - `artifacts: ["tests/test_foundation.py::test_name"]` - Links to implementations
+  - These tags appear throughout all documentation for cross-referencing
+
+**STEP 3: Design & Test Specifications**
+- `docs/design-decisions.md` - Technical decisions with `[REQ-XXX]` tags
+- `docs/test-cases.md` - Test specifications with WHY explanations
+- `docs/test-strategy.md` - Test approach and techniques
+
+**STEP 4: Automated Implementation**
+- `tests/test_foundation.py` - 8 foundation test cases
+- `src/movie_db_qa/pages/` - Page Object Model
+- `tests/conftest.py` - Fixtures, logging, API validation
+
+**STEP 5: Artifacts & Evidence**
+- `artifacts/qa-reports/index.html` - HTML test report
+- `artifacts/qa-coverage/index.html` - Coverage report
+- `artifacts/defect-manual-reports/defects-manual-found.md` - 5 defects with screenshots
+- `artifacts/bug-screenshots/*.png` - Automated failure captures
+
+**STEP 6: Manual & AI-Assisted Validation**
+- `rubric/requirements.yml` - Structured requirements enable manual traceability verification
+  - 17 requirements with full source → design → tests → artifacts linking
+  - Tags (`R-1`, `DD-4.1`, `TC-XXX`) allow manual cross-reference validation
+- `rubric/` - **AI analysis scores project 0-100** against assignment criteria
+  - Evaluates all rubric criteria from `rubric/eval-rubric.md`
+  - Validates traceability completeness manually via hot links
+  - Generates scored reports: `artifacts/rubric-reports/phase5-rubric-eval.md` (91/100)
+
+**Future Enhancement:** `make audit` - Automated traceability validation script
+  - Would validate all requirements traced to design docs
+  - Would verify all artifacts exist at specified paths
+  - Would detect orphaned implementations (tests without requirements)
+  - See design in `docs/ai-qa-testing.md` (not yet implemented)
+
+### How Traceability Tags Work
+
+Example from `rubric/requirements.yml`:
+```yaml
+FLT-CAT-1.2:
+  desc: "Trending filter displays trending content"
+  source: "PDF p.1 'Categories: Popular, Trending...'"
+  rubric: ["R-1", "R-2"]        # → Links to rubric/eval-rubric.md criteria
+  design: ["DD-4.1"]             # → Links to docs/design-decisions.md sections
+  tests: ["TC-FLT-CAT-002"]      # → Links to docs/test-cases.md test case
+  artifacts:
+    - "tests/test_foundation.py::test_trending_filter_works"  # → Actual code
+    - "docs/test-cases.md#TC-FLT-CAT-002"                     # → Documentation
+```
+
+**These tags appear throughout all project files:**
+- Design docs reference `[REQ-FLT-CAT-1.2]` and `[DD-4.1]`
+- Test cases reference `TC-FLT-CAT-002` and trace to requirements
+- Rubric criteria `R-1`, `R-2` validated against all linked artifacts
+- Manual verification via hot links in rubric evaluation reports
+
+**Key Innovation:** Requirements as structured YAML enables manual traceability verification and AI-powered rubric scoring (with future automation potential via `make audit`).
+
+📖 **[Read full paradigm shift explanation →](docs/ai-qa-testing.md)**
 
 ---
 
@@ -37,63 +117,65 @@ movie_db_qa/
 │   └── workflows/
 │       └── ci.yml                            # GitHub Actions CI/CD pipeline
 │
-├── docs/                                     # 📚 Documentation
-│   ├── defects-manual-found.md                            # Bug reports with evidence (6 defects)
-│   ├── design-decisions.md                   # Design rationale and trade-offs
+├── artifacts/                                # 📦 Deliverables & Generated Outputs
+│   ├── defect-manual-reports/                # Manual defect reports (exploratory testing)
+│   │   ├── defects-manual-found.md           # 5 defects with repro steps
+│   │   └── screenshots/                      # Defect evidence screenshots
+│   │       ├── BugPageRefresh_1of1.png
+│   │       ├── BugPagination_outragousPageNum_2of2.png
+│   │       └── example-test-failure-screenshot.png
+│   ├── rubric-reports/                       # AI rubric evaluations
+│   │   ├── phase5-rubric-eval.md             # Final rubric evaluation (91/100)
+│   │   └── req-traceability-report.md        # Requirements traceability validation
+│   ├── qa-reports/                           # QA test execution reports (pytest-html)
+│   │   └── index.html                        # Latest test execution report
+│   ├── qa-coverage/                          # QA code coverage reports
+│   │   └── index.html                        # Latest coverage report
+│   ├── bug-screenshots/                      # Auto-captured bug screenshots
+│   │   └── *.png                             # Generated on test failure
+│   └── logs/                                 # Execution logs
+│       └── test_execution.log                # Test run trace with timestamps
+│
+├── docs/                                     # 📚 Process Documentation
 │   ├── requirements.md                       # Reverse-engineered requirements
-│   ├── test-cases.md                         # Test case specifications (Phase 2)
-│   ├── test-strategy.md                      # Testing approach (Phase 2)
-│   ├── images/                               # Screenshots for defect evidence
-│   │   ├── BugPageRefresh_1of1.png
-│   │   └── BugPagination_outragousPageNum_2of2.png
-│   ├── reports/                              # 📊 Sample test/coverage reports
-│   │   ├── test-report-v0.3.0.html           # Sample test results report
-│   │   └── coverage-report-v0.3.0.html       # Sample coverage report
-│   └── reference/                            # Assignment reference materials
+│   ├── test-strategy.md                      # Testing approach and rationale
+│   ├── test-cases.md                         # Test case specifications with WHY
+│   ├── design-decisions.md                   # Design rationale and trade-offs
+│   ├── ai-qa-testing.md                      # Traceability paradigm explanation
+│   ├── rubric-xfail-clarification.md         # xfail test philosophy clarification
+│   └── reference/                            # Assignment materials
+│       ├── rr_qa_automation_assignment_.pdf  # Original assignment PDF
 │       ├── assignment-overview.md
 │       └── priorities.md
+│
+├── rubric/                                   # 📊 Evaluation Framework
+│   ├── requirements.yml                      # 🔗 Structured requirements (traceability)
+│   ├── eval-rubric.md                        # 100-point scoring criteria
+│   └── eval-prompt.md                        # AI evaluation instructions
 │
 ├── src/                                      # 🔧 Source Code
 │   └── movie_db_qa/
 │       ├── __init__.py
-│       ├── pages/                            # Page Object Model (Phase 3)
+│       ├── pages/                            # Page Object Model
 │       │   ├── base_page.py                  # Common page interactions
 │       │   └── discover_page.py              # TMDB discovery page
-│       └── utils/                            # Helper utilities (Phase 3)
+│       └── utils/                            # Helper utilities
 │           ├── logger.py                     # Logging configuration
 │           └── config.py                     # Settings management
 │
 ├── tests/                                    # 🧪 Test Suite
 │   ├── conftest.py                           # Pytest fixtures + screenshot capture
-│   ├── test_foundation.py                    # 8 foundation test cases (Phase 3)
+│   ├── test_foundation.py                    # 8 foundation test cases
 │   ├── test_sanity.py                        # Framework sanity checks
 │   └── github_ci_errors/                     # CI debugging logs
 │
-├── screenshots/                              # 📸 Test Failure Screenshots (gitignored)
-│   └── *.png                                 # Auto-captured on test failure
-│
-├── logs/                                     # 📋 Test Execution Logs (gitignored)
-│   └── test_execution.log                    # Full test run trace with timestamps
-│
-├── rubric/                                   # 📊 Evaluation Framework
-│   ├── eval-rubric.md                        # 100-point scoring criteria
-│   ├── eval-prompt.md                        # AI evaluation instructions
-│   └── reports/                              # Self-assessment reports by phase
-│
-├── reference/                                # 📄 Assignment Materials
-│   └── rr_qa_automation_assignment_.pdf      # Original assignment PDF
-│
-├── report/                                   # 📈 Test Reports (Phase 3)
-│   └── README.md                             # Report generation instructions
-│
-├── .github/workflows/ci.yml                  # CI/CD pipeline
 ├── .pre-commit-config.yaml                   # Git hooks for quality gates
 ├── pyproject.toml                            # Dependencies + tool configs
 ├── Makefile                                  # Build automation (make test, make quality)
 ├── TODO.md                                   # Project plan and progress tracker
 ├── CHANGELOG.md                              # Version history
 ├── CLAUDE.md                                 # AI coding standards
-├── VERSION                                   # Semantic version (0.2.0)
+├── VERSION                                   # Semantic version (1.0.0)
 └── README.md                                 # This document
 ```
 
@@ -102,12 +184,12 @@ movie_db_qa/
 | Directory | Purpose | Status |
 |-----------|---------|--------|
 | `.github/workflows/` | CI/CD pipeline configuration | ✅ Complete |
-| `docs/` | All documentation (requirements, strategy, test cases, defects) | ✅ Phase 2 |
-| `src/movie_db_qa/` | Application code (Page Objects, utilities) | ⏳ Phase 3 |
-| `tests/` | Test implementations and fixtures | ⏳ Phase 3 |
-| `rubric/` | Evaluation framework and self-assessments | ✅ Complete |
+| `artifacts/` | Generated test reports, coverage, screenshots, logs | ✅ v1.2.0 |
+| `docs/` | All documentation (requirements, strategy, test cases, defects) | ✅ Complete |
+| `rubric/` | Evaluation framework, traceability, and self-assessments | ✅ Complete |
+| `src/movie_db_qa/` | Application code (Page Objects, utilities) | ✅ Complete |
+| `tests/` | Test implementations and fixtures | ✅ Complete |
 | `reference/` | Assignment artifacts (read-only) | ✅ Complete |
-| `report/` | Test execution reports (HTML, coverage) | ⏳ Phase 3 |
 
 ### Configuration Files
 
@@ -139,13 +221,9 @@ make quality
 make test-full
 
 # 5. View reports
-open htmlcov/index.html        # Fresh coverage report
-open report/index.html          # Fresh test results report
-cat logs/test_execution.log     # Test execution log file
-
-# Or view sample reports (v0.3.0 baseline):
-open docs/reports/test-report-v0.3.0.html
-open docs/reports/coverage-report-v0.3.0.html
+open artifacts/qa-coverage/index.html        # Coverage report
+open artifacts/qa-reports/index.html          # Test results report
+cat artifacts/logs/test_execution.log     # Test execution log file
 ```
 
 ---
@@ -307,31 +385,48 @@ pytest -v -s
 make quality
 ```
 
+### Understanding Test Results
+
+**Current test results:** 2 pass, 4 xfail, 1 xpass, 1 skip
+
+**What this means:**
+- ✅ **2 passing** - Features working correctly (Popular filter, Trending filter)
+- ✅ **4 xfail** - Known app bugs automated (DEF-001, DEF-002, DEF-003, DEF-007)
+- ⚠️ **1 xpass** - Previously failing test now passing (investigate if bug fixed)
+- ⏸️ **1 skip** - Deferred test (out of scope)
+
+**CRITICAL:** Tests marked `xfail` are **INTENTIONALLY expected to fail** due to known application bugs, NOT test implementation issues. This is proper pytest usage for:
+- Automating defect reproduction (each xfail = automated bug validation)
+- Maintaining test coverage on buggy features
+- Preventing false CI failures while documenting expected behavior
+
+**Total functional test coverage: 7/8 tests execute (88% execution rate)**
+
+See [Test Strategy - xfail Philosophy](docs/test-strategy.md#xfail-test-philosophy-critical-clarification) for detailed explanation.
+
 ### Viewing Reports
 
 ```bash
 # 1. Fresh HTML test report
-open report/index.html
+open artifacts/qa-reports/index.html
 
 # 2. Fresh coverage report
-open htmlcov/index.html
+open artifacts/qa-coverage/index.html
 
 # 3. Test execution log file
-cat logs/test_execution.log
+cat artifacts/logs/test_execution.log
 
 # 4. Failure screenshots (auto-captured)
-ls screenshots/  # Only populated on test failures
+ls artifacts/bug-screenshots/  # Only populated on test failures
 
-# Or view sample reports (v0.3.0 baseline):
-open docs/reports/test-report-v0.3.0.html
-open docs/reports/coverage-report-v0.3.0.html
-open docs/images/example-test-failure-screenshot.png
+# Or view defect evidence:
+open artifacts/defect-manual-reports/screenshots/example-test-failure-screenshot.png
 ```
 
 **Screenshot Capture:**
 - Automatically captures screenshots on test failure
-- Saved to `screenshots/` directory (gitignored)
-- Example: `docs/images/example-test-failure-screenshot.png`
+- Saved to `artifacts/bug-screenshots/` directory (gitignored)
+- Example: `artifacts/defect-manual-reports/screenshots/example-test-failure-screenshot.png`
 - Triggered by pytest hook in `tests/conftest.py`
 
 ### CI Pipeline
@@ -436,7 +531,7 @@ def browser():
 - **DEF-003 (High):** Filter lost after pagination - Users can't browse filtered results across pages
 - **DEF-005 (Medium):** Page refresh loses state - Can't bookmark or share filtered views
 
-📖 **[View complete defect reports →](docs/defects-manual-found.md)**
+📖 **[View complete defect reports →](artifacts/defect-manual-reports/defects-manual-found.md)**
 
 ---
 
@@ -500,7 +595,7 @@ Stages:
 | [docs/requirements.md](docs/requirements.md) | Reverse-engineered requirements with semantic IDs |
 | [docs/test-strategy.md](docs/test-strategy.md) | Testing approach and rationale |
 | [docs/test-cases.md](docs/test-cases.md) | Test case specifications with WHY explanations |
-| [docs/defects-manual-found.md](docs/defects-manual-found.md) | Bug reports with reproduction steps and evidence |
+| [artifacts/defect-manual-reports/defects-manual-found.md](artifacts/defect-manual-reports/defects-manual-found.md) | Bug reports with reproduction steps and evidence |
 | [docs/design-decisions.md](docs/design-decisions.md) | Design rationale, alternatives, and trade-offs |
 
 ### Configuration

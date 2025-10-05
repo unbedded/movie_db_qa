@@ -320,26 +320,108 @@ When evaluating a project:
 
 ### Output Format
 ```markdown
-# Project Evaluation Report
-Generated: [date]
-Branch: [branch-name]
+# QA Automation Project Evaluation Report
+
+**Project:** movie_db_qa
+**Branch:** [branch-name]
+**Evaluated:** [YYYY-MM-DD]
+**Evaluator:** AI Senior QA Manager
+
+---
 
 ## Executive Summary
-**Total Score: X/100 (Grade)**
-Brief 2-3 sentence overall assessment.
 
-## Category Breakdown
-[Detailed scores for each category]
+**Overall Grade: XX/100 - [Excellent/Good/Adequate/Poor] ([Status Description])**
 
-## Strengths
-[What was done well - specific examples]
+[2-3 sentences summarizing overall quality, key strengths, and major gaps]
 
-## Areas for Improvement
-[What needs work - specific, actionable]
+**Readiness:** [✅ Ready for submission / ⚠️ Needs improvements / ❌ Not ready]
 
-## Recommendations
-[Prioritized action items]
+### Category Scoring Summary
 
-## Conclusion
-[Final assessment and next steps]
+| Category | Score | Details | Rubric Reference |
+|----------|-------|---------|------------------|
+| [Test Design & Documentation](#1-test-design--documentation-xx30-points) | **XX/30** | [Status] - [Brief description] | [R-1: Test Design](#1-test-design--documentation-30-points) |
+| [Code Quality & Maintainability](#2-code-quality--maintainability-xx25-points) | **XX/25** | [Status] - [Brief description] | [R-2: Code Quality](#2-code-quality--maintainability-25-points) |
+| [Documentation Completeness](#3-documentation-completeness-xx25-points) | **XX/25** | [Status] - [Brief description] | [R-3: Documentation](#3-documentation-completeness-25-points) |
+| [Defect Reporting](#4-defect-reporting-xx15-points) | **XX/15** | [Status] - [Brief description] | [R-4: Defect Reporting](#4-defect-reporting-15-points) |
+| [Test Automation Implementation](#5-test-automation-implementation-xx15-points) | **XX/15** | [Status] - [Brief description] | [R-5: Test Automation](#5-test-automation-implementation-15-points) |
+| [CI/CD Strategy](#6-cicd-strategy--understanding-xx5-points) | **XX/5** | [Status] - [Brief description] | [R-6: CI/CD](#6-cicd-strategy--understanding-5-points) |
+| [Professional Presentation](#7-professional-presentation-xx5-points) | **XX/5** | [Status] - [Brief description] | [R-7: Presentation](#7-professional-presentation-5-points) |
+| **TOTAL** | **XX/100** | **[Grade]** ([threshold]) | [Full Rubric](#evaluation-categories) |
+
+---
+
+### Key Strengths (Demonstrable Facts)
+
+[List 3-5 key strengths with hot links to evidence files]
+
+Example:
+#### ✅ Requirements Traceability ([requirements.yml](../requirements.yml))
+- **17 requirements** in machine-readable YAML format
+- **100% traceability:** source → design → tests → artifacts
+- **Example:** [REQ-ID](../requirements.yml#LXX) links to [test](../../tests/test_file.py#LXX)
+
+---
+
+### Critical Gaps
+
+[List gaps with impact assessment (-X points)]
+
+---
+
+### Recommendation
+
+[Overall recommendation: ✅ APPROVED / ⚠️ NEEDS WORK / ❌ NOT READY]
+
+---
+
+## Appendix: Detailed Category Breakdown
+
+### 1. Test Design & Documentation (XX/30 points)
+**Performance Level:** [Excellent/Good/Adequate/Poor]
+
+**Strengths:**
+- [Specific examples with file links]
+
+**Weaknesses:**
+- [Specific gaps with file:line references]
+
+**Scoring Details:**
+- Test Cases: X/10
+- Test Design Rationale (WHY): X/10
+- Test Design Techniques: X/5
+- Test Strategy Document: X/5
+
+**Evidence:**
+- [Link to test files]
+- [Link to documentation]
+
+---
+
+[Repeat for categories 2-7]
+
+---
+
+## Gate Decision
+
+**Can this branch merge to develop?** [✅ YES / ⚠️ WITH FIXES / ❌ NO]
+
+**Rationale:** [Brief explanation]
+
+**Required before merge:**
+- [Blocking item 1 if applicable]
+- [Blocking item 2 if applicable]
+
+---
+
+## Final Assessment
+
+[3-5 sentences providing overall quality, readiness, and key message]
+
+---
+
+## Score Progression History
+
+[Optional section showing evolution across phases]
 ```

@@ -1,0 +1,209 @@
+# TMDB Discovery - Structured Requirements for Traceability
+# Project: movie_db_qa - QA Automation Assignment
+# Purpose: Machine-readable requirements for automated audit validation
+# Format: REQ-ID → source + rubric + design + tests + artifacts
+#
+# SOURCE DOCUMENTS:
+# - "PDF" = docs/reference/rr_qa_automation_assignment_.pdf (Rapyuta assignment document)
+# - "docs/requirements.md" = Reverse-engineered from app exploration
+#
+# NOTE: "PDF p.1" citations refer to pages in rr_qa_automation_assignment_.pdf
+
+# Filtering Requirements (from PDF p.1 - Filtering Options)
+FLT-CAT-1.1:
+  desc: "Popular filter displays popular content"
+  source: "PDF p.1 'Categories: Popular, Trending, Newest, Top Rated'"
+  priority: "High"
+  rubric: ["R-1", "R-2"]
+  design: ["DD-4.1"]
+  tests: ["TC-FLT-CAT-001"]
+  artifacts:
+    - "tests/test_foundation.py::test_tc_flt_cat_001_popular_filter_works"
+    - "docs/test-cases.md#TC-FLT-CAT-001"
+
+FLT-CAT-1.2:
+  desc: "Trending filter displays trending content"
+  source: "PDF p.1 'Categories: Popular, Trending, Newest, Top Rated'"
+  priority: "High"
+  rubric: ["R-1", "R-2"]
+  design: ["DD-4.1"]
+  tests: ["TC-FLT-CAT-002"]
+  artifacts:
+    - "tests/test_foundation.py::test_tc_flt_cat_002_trending_filter_works"
+    - "docs/test-cases.md#TC-FLT-CAT-002"
+
+# Pagination Requirements (from PDF p.1 - Pagination)
+PAG-1.1:
+  desc: "User can navigate between pages"
+  source: "PDF p.1 'Pagination'"
+  priority: "High"
+  rubric: ["R-1", "R-2"]
+  design: ["DD-4.2"]
+  tests: ["TC-PAG-001"]
+  artifacts:
+    - "tests/test_foundation.py::test_tc_pag_001_navigate_to_page_2"
+    - "docs/test-cases.md#TC-PAG-001"
+
+PAG-2.1:
+  desc: "Filters persist across pagination"
+  source: "PDF p.1 'Pagination' + UX standards"
+  priority: "High"
+  rubric: ["R-1", "R-6"]
+  design: ["DD-4.2"]
+  tests: ["TC-PAG-003"]
+  defects: ["DEF-003"]
+  artifacts:
+    - "tests/test_foundation.py::test_tc_pag_003_filter_persists_across_pagination"
+    - "docs/test-cases.md#TC-PAG-003"
+    - "artifacts/defect-manual-reports/defects-manual-found.md#DEF-003"
+
+PAG-2.2:
+  desc: "Pagination handles boundary conditions"
+  source: "PDF p.1 'Pagination works for the initial few pages, but the last few pages may not function properly'"
+  priority: "High"
+  rubric: ["R-1", "R-6"]
+  design: ["DD-4.2"]
+  tests: ["TC-PAG-002"]
+  defects: ["DEF-002"]
+  artifacts:
+    - "tests/test_foundation.py::test_tc_pag_002_last_page_boundary_error"
+    - "docs/test-cases.md#TC-PAG-002"
+    - "artifacts/defect-manual-reports/defects-manual-found.md#DEF-002"
+
+# URL Management Requirements (from PDF p.1 - Known Issues)
+URL-2.1:
+  desc: "Direct URL access works correctly"
+  source: "PDF p.1 'Refreshing/Accessing the page using specific slugs (e.g., https://tmdb-discover.surge.sh/popular) may not work as expected'"
+  priority: "High"
+  rubric: ["R-1", "R-6"]
+  design: ["DD-4.3"]
+  tests: ["TC-NEG-001"]
+  defects: ["DEF-001"]
+  artifacts:
+    - "tests/test_foundation.py::test_tc_neg_001_direct_url_access_fails"
+    - "docs/test-cases.md#TC-NEG-001"
+    - "artifacts/defect-manual-reports/defects-manual-found.md#DEF-001"
+
+URL-2.2:
+  desc: "Browser refresh preserves application state"
+  source: "PDF p.1 'Refreshing/Accessing the page...' (negative case)"
+  priority: "High"
+  rubric: ["R-1", "R-6"]
+  design: ["DD-4.3"]
+  tests: []
+  defects: ["DEF-004"]
+  artifacts:
+    - "artifacts/defect-manual-reports/defects-manual-found.md#DEF-004"
+
+# Negative Testing Requirements
+NEG-1.1:
+  desc: "Invalid page numbers handled gracefully"
+  source: "BVA test design technique"
+  priority: "High"
+  rubric: ["R-1", "R-2"]
+  design: ["DD-5.2"]
+  tests: ["TC-NEG-002"]
+  artifacts:
+    - "tests/test_foundation.py::test_tc_neg_002_invalid_page_number"
+    - "docs/test-cases.md#TC-NEG-002"
+
+# Combined Filter Requirements (Deferred)
+FLT-CMB-1.1:
+  desc: "Multiple filters work together"
+  source: "Manual exploration + UX standards"
+  priority: "Medium"
+  rubric: ["R-1"]
+  design: ["DD-4.1"]
+  tests: ["TC-CMB-001"]
+  status: "Deferred - Foundation scope"
+  artifacts:
+    - "tests/test_foundation.py::test_tc_cmb_001_popular_movies_combined"
+    - "docs/test-cases.md#TC-CMB-001"
+
+# Assignment Meta-Requirements (from PDF p.2)
+ASSIGN-1:
+  desc: "Step-by-step test descriptions in a document"
+  source: "PDF p.1 '1. Defining step-by-step test descriptions in a document. (Be creative!)'"
+  priority: "Critical"
+  rubric: ["R-1", "R-2"]
+  design: ["DD-5"]
+  tests: []
+  artifacts:
+    - "docs/test-cases.md"
+
+ASSIGN-2:
+  desc: "Fully automated test suite"
+  source: "PDF p.2 '2. Implementing the functional test suite...fully automated'"
+  priority: "Critical"
+  rubric: ["R-5"]
+  design: ["DD-9"]
+  tests: []
+  artifacts:
+    - "tests/test_foundation.py"
+    - "Makefile"
+
+ASSIGN-3:
+  desc: "Console and HTML reports"
+  source: "PDF p.2 'provide both console and HTML reports'"
+  priority: "Critical"
+  rubric: ["R-5.1", "R-5.2"]
+  design: ["DD-9.2"]
+  tests: []
+  artifacts:
+    - "artifacts/qa-reports/index.html"
+
+ASSIGN-4:
+  desc: "Browser API calls and assertions"
+  source: "PDF p.2 'Usage of browser APIs calls and how you are asserting them'"
+  priority: "Critical"
+  rubric: ["R-5.3"]
+  design: ["DD-10"]
+  tests: ["TC-FLT-CAT-001", "TC-FLT-CAT-002", "TC-PAG-001"]
+  artifacts:
+    - "tests/conftest.py::tmdb_api_calls fixture"
+    - "docs/test-strategy.md#API Validation"
+
+ASSIGN-5:
+  desc: "Logging usage demonstrated"
+  source: "PDF p.2 'How you have used Logging in your suite'"
+  priority: "Critical"
+  rubric: ["R-5.4"]
+  design: ["DD-6"]
+  tests: []
+  artifacts:
+    - "src/movie_db_qa/utils/logger.py"
+    - "artifacts/logs/*.log"
+
+ASSIGN-6:
+  desc: "Test results with attachments and defects"
+  source: "PDF p.2 '3. Report test results with attachments and the defects that you found'"
+  priority: "Critical"
+  rubric: ["R-3", "R-5"]
+  design: ["DD-8"]
+  tests: []
+  artifacts:
+    - "artifacts/defect-manual-reports/defects-manual-found.md"
+    - "artifacts/defect-manual-reports/screenshots/example-test-failure-screenshot.png"
+
+ASSIGN-7:
+  desc: "CI integration approach documented"
+  source: "PDF p.2 '4. An approach on how you would proceed with this suite integration on CI'"
+  priority: "Critical"
+  rubric: ["R-7"]
+  design: ["DD-11"]
+  tests: []
+  artifacts:
+    - "README.md#CI/CD Integration"
+    - ".github/workflows/ci.yml"
+
+ASSIGN-8:
+  desc: "Documentation questions answered"
+  source: "PDF p.2 'What is your testing strategy? Which cases did you generate? And why?...'"
+  priority: "Critical"
+  rubric: ["R-4"]
+  design: []
+  tests: []
+  artifacts:
+    - "README.md"
+    - "docs/test-strategy.md"
+    - "docs/design-decisions.md"

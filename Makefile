@@ -1,6 +1,6 @@
 # Python Project Makefile
 
-.PHONY: help quality test test-full format lint typecheck clean install version-sync version-check
+.PHONY: help quality test test-full format lint typecheck clean clean-artifacts install version-sync version-check
 
 # Default target
 help: ## Show this help message
@@ -32,18 +32,25 @@ test: ## Run test suite quickly
 	pytest -q
 
 test-full: ## Run tests with coverage and HTML report
-	pytest --cov=src --cov-report=html --cov-report=term --html=report/index.html --self-contained-html
+	pytest --cov=src --cov-report=html:artifacts/qa-coverage --cov-report=term --html=artifacts/qa-reports/index.html --self-contained-html
 
 # Development
 install: ## Install project dependencies
 	pip install -e .
 	@if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-clean: ## Clean build artifacts
+clean: ## Clean all build artifacts and generated files
 	rm -rf build/ dist/ *.egg-info/
-	rm -rf htmlcov/ .coverage .pytest_cache/
+	rm -rf artifacts/ .coverage .pytest_cache/
 	find . -type d -name __pycache__ -delete
 	find . -type f -name "*.pyc" -delete
+
+clean-artifacts: ## Clean generated artifacts (preserve manual defect reports)
+	rm -rf artifacts/qa-reports/ artifacts/qa-coverage/ artifacts/bug-screenshots/ artifacts/logs/
+	rm -rf .coverage .pytest_cache/
+	find . -type d -name __pycache__ -exec rm -rf {} + 2>/dev/null || true
+	find . -type f -name "*.pyc" -delete 2>/dev/null || true
+	@echo "✅ Generated artifacts cleaned (manual defect reports preserved)"
 
 # Version management (used by /bump-version command)
 version-sync: ## Sync VERSION file to Python project files

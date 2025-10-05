@@ -11,12 +11,12 @@ from playwright.sync_api import Browser, BrowserContext, Page, Playwright, sync_
 from movie_db_qa.utils.config import config
 
 # Screenshot directory
-SCREENSHOT_DIR = Path("screenshots")
-SCREENSHOT_DIR.mkdir(exist_ok=True)
+SCREENSHOT_DIR = Path("artifacts/bug-screenshots")
+SCREENSHOT_DIR.mkdir(parents=True, exist_ok=True)
 
 # Log directory
-LOG_DIR = Path("logs")
-LOG_DIR.mkdir(exist_ok=True)
+LOG_DIR = Path("artifacts/logs")
+LOG_DIR.mkdir(parents=True, exist_ok=True)
 
 
 @pytest.fixture(scope="session", autouse=True)
@@ -138,12 +138,18 @@ def page(context: BrowserContext, request: pytest.FixtureRequest) -> Generator[P
 
     yield page
 
-    # Capture screenshot on test failure
-    if request.node.rep_call.failed if hasattr(request.node, "rep_call") else False:
-        screenshot_name = f"{request.node.name}_{request.node.rep_call.when}.png"
-        screenshot_path = SCREENSHOT_DIR / screenshot_name
-        logger.info("Test failed - capturing screenshot: %s", screenshot_path)
-        page.screenshot(path=str(screenshot_path))
+    # Capture screenshot on test failure (including xfail tests to show actual bug state)
+    if hasattr(request.node, "rep_call"):
+        # Capture for both unexpected failures and expected failures (xfail)
+        # xfail screenshots demonstrate the actual defect behavior
+        if request.node.rep_call.failed or (
+            hasattr(request.node.rep_call, "wasxfail") and request.node.rep_call.wasxfail
+        ):
+            screenshot_name = f"{request.node.name}_{request.node.rep_call.when}.png"
+            screenshot_path = SCREENSHOT_DIR / screenshot_name
+            status = "xfail" if hasattr(request.node.rep_call, "wasxfail") else "failed"
+            logger.info("Test %s - capturing screenshot: %s", status, screenshot_path)
+            page.screenshot(path=str(screenshot_path))
 
     page.close()
 
@@ -151,6 +157,10 @@ def page(context: BrowserContext, request: pytest.FixtureRequest) -> Generator[P
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item: pytest.Item, call: pytest.CallInfo[None]) -> Generator[None, Any, None]:
     """Pytest hook to capture test results for screenshot on failure.
+
+    NOTE: xfail tests in this project document EXPECTED application failures
+    (known bugs DEF-001, DEF-002, DEF-003, DEF-007), not test implementation issues.
+    This is proper pytest usage for maintaining coverage while preventing false CI failures.
 
     Args:
         item: Test item

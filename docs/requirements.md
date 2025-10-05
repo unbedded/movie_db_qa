@@ -418,7 +418,7 @@ based on:
 - **Design Decisions:** `docs/design-decisions.md`
 - **Test Strategy:** `docs/test-strategy.md`
 - **Test Cases:** `docs/test-cases.md`
-- **Defects Found:** `docs/defects-manual-found.md`
+- **Defects Found:** `artifacts/defect-manual-reports/defects-manual-found.md`
 
 ---
 

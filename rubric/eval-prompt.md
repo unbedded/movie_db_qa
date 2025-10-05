@@ -20,7 +20,7 @@ Evaluate this QA automation project against the comprehensive rubric defined in 
 - `README.md` - Must answer all 8 required questions
 - `docs/test-cases.md` - Step-by-step test descriptions
 - `docs/test-strategy.md` - Testing approach and rationale
-- `docs/defects-manual-found.md` - Defect reports with evidence
+- `artifacts/defect-manual-reports/defects-manual-found.md` - Defect reports with evidence
 - `docs/assignment-overview.md` - Assignment context (reference)
 - `docs/priorities.md` - Scoring priorities (reference)
 
@@ -84,7 +84,7 @@ Evaluate this QA automation project against the comprehensive rubric defined in 
 
 #### 4. Defect Reporting (15 points)
 **Critical Questions:**
-- Are 5+ defects documented in `docs/defects-manual-found.md`?
+- Are 5+ defects documented in `artifacts/defect-manual-reports/defects-manual-found.md`?
 - Are 3+ new defects found (beyond the 2 known issues)?
 - Does each defect have: ID, Title, Severity, Priority?
 - Are reproduction steps clear and complete?
@@ -188,19 +188,53 @@ Generate a comprehensive evaluation report in Markdown format:
 
 **Project:** movie_db_qa
 **Branch:** [branch-name]
-**Evaluated:** [YYYY-MM-DD HH:MM]
+**Evaluated:** [YYYY-MM-DD]
 **Evaluator:** AI Senior QA Manager
 
 ---
 
 ## Executive Summary
 
-**Total Score: XX/100**
-**Grade: [Excellent/Good/Adequate/Poor]**
+**Overall Grade: XX/100 - [Excellent/Good/Adequate/Poor] ([Status Description])**
 
 [2-3 sentences summarizing overall quality, key strengths, and major gaps]
 
+**Readiness:** [✅ Ready for submission / ⚠️ Needs improvements / ❌ Not ready]
+
+### Category Scoring Summary
+
+| Category | Score | Details | Rubric Reference |
+|----------|-------|---------|------------------|
+| [Test Design & Documentation](#1-test-design--documentation-xx30-points) | **XX/30** | [Status] - [Brief description] | [R-1: Test Design](../../rubric/eval-rubric.md#1-test-design--documentation-30-points) |
+| [Code Quality & Maintainability](#2-code-quality--maintainability-xx25-points) | **XX/25** | [Status] - [Brief description] | [R-2: Code Quality](../../rubric/eval-rubric.md#2-code-quality--maintainability-25-points) |
+| [Documentation Completeness](#3-documentation-completeness-xx25-points) | **XX/25** | [Status] - [Brief description] | [R-3: Documentation](../../rubric/eval-rubric.md#3-documentation-completeness-25-points) |
+| [Defect Reporting](#4-defect-reporting-xx15-points) | **XX/15** | [Status] - [Brief description] | [R-4: Defect Reporting](../../rubric/eval-rubric.md#4-defect-reporting-15-points) |
+| [Test Automation Implementation](#5-test-automation-implementation-xx15-points) | **XX/15** | [Status] - [Brief description] | [R-5: Test Automation](../../rubric/eval-rubric.md#5-test-automation-implementation-15-points) |
+| [CI/CD Strategy](#6-cicd-strategy--understanding-xx5-points) | **XX/5** | [Status] - [Brief description] | [R-6: CI/CD](../../rubric/eval-rubric.md#6-cicd-strategy--understanding-5-points) |
+| [Professional Presentation](#7-professional-presentation-xx5-points) | **XX/5** | [Status] - [Brief description] | [R-7: Presentation](../../rubric/eval-rubric.md#7-professional-presentation-5-points) |
+| **TOTAL** | **XX/100** | **[Grade]** ([threshold]) | [Full Rubric](../../rubric/eval-rubric.md) |
+
 ---
+
+### Key Strengths (Demonstrable Facts)
+
+[List key strengths with hot links to evidence]
+
+---
+
+### Critical Gaps
+
+[List gaps with impact assessment]
+
+---
+
+### Recommendation
+
+[Overall recommendation with readiness statement]
+
+---
+
+## Appendix: Detailed Category Breakdown
 
 ## Detailed Category Breakdown
 
