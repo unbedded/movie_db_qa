@@ -38,6 +38,7 @@ pip-delete-this-directory.txt
 
 # Unit test / coverage reports
 htmlcov/
+report/
 .tox/
 .nox/
 .coverage
@@ -208,8 +209,13 @@ __marimo__/
 
 # Project-specific
 .claude/
-CLAUDE.md
+# CLAUDE.md - removed from ignore, needs to be tracked
+
+# CI debugging artifacts
+tests/github_ci_errors/
 
 # IDE
 .vscode/
 .idea/
+screenshots/
+logs/

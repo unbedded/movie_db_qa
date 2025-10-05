@@ -31,8 +31,8 @@ typecheck: ## Type check with mypy
 test: ## Run test suite quickly
 	pytest -q
 
-test-full: ## Run tests with coverage
-	pytest --cov=src --cov-report=html --cov-report=term
+test-full: ## Run tests with coverage and HTML report
+	pytest --cov=src --cov-report=html --cov-report=term --html=report/index.html --self-contained-html
 
 # Development
 install: ## Install project dependencies

@@ -23,6 +23,9 @@ dependencies = []
 dev = [
     "pytest>=7.0",
     "pytest-cov>=4.0",
+    "pytest-html>=4.0",
+    "playwright>=1.40",
+    "pytest-playwright>=0.4",
     "mypy>=1.0",
     "ruff>=0.1.0",
     "pre-commit>=3.0",
@@ -52,7 +55,11 @@ addopts = [
     "--verbose",
     "--tb=short",
     "-ra",
+    "--log-cli-level=INFO",
 ]
+log_cli = true
+log_cli_format = "%(asctime)s [%(levelname)8s] %(name)s - %(message)s"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
 markers = [
     "slow: marks tests as slow (deselect with '-m \"not slow\"')",
     "integration: marks tests as integration tests",
