@@ -7,23 +7,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.3.0] - 2025-10-05
+
+### Summary
+**Final Polish & Delivery - Submission Ready**
+- Phase 6 rubric evaluation: 95/100 (improved from 91/100)
+- Enhanced xfail screenshot capture for defect evidence
+- Fixed requirements.yml traceability (9 broken paths corrected)
+- Professional submission cover letter created
+- All quality gates passing (ruff, mypy, black, pytest, CI/CD)
+
 ### Added
-- xfail test philosophy documentation in test-strategy.md
-- Test results interpretation section in README.md
-- Clarifying comments in conftest.py about xfail usage
-- Requirements traceability diagram in README.md (shows source documents → deliverables flow)
-- Requirements origin section in ai-qa-testing.md (explains PDF + app exploration sources)
-- Comprehensive rubric clarification document (docs/rubric-xfail-clarification.md)
-- "How Traceability Tags Work" section in README.md with concrete YAML example
-- Explanation of rubric AI evaluation role in automated validation (0-100 score)
-- Claude Code dependency analysis in ai-qa-testing.md (what requires CLI vs. portable)
-- API migration path documentation (Claude Code CLI → Anthropic API automation)
+- **Automated xfail screenshot capture** - conftest.py now captures screenshots for expected failures, providing visual evidence of actual defect behavior
+- **artifacts/bug-screenshots/README.md** - Comprehensive documentation of screenshot capture system
+- **docs/cover-letter.txt** - Professional submission cover letter highlighting requirements elicitation and traceability achievements
+- **artifacts/rubric-reports/phase6-rubric-eval.md** - Final rubric evaluation (95/100)
+- **VALIDATION_REPORT.md** - Requirements.yml tag validation report
+- **README TOC updates** - Added missing sections (Development Workflow, Project Status, Assignment Context)
+
+### Fixed
+- **requirements.yml traceability** - Corrected 9 broken artifact paths:
+  - Updated 8 test function names to match current `test_tc_xxx_yyy_zzz` naming convention
+  - Fixed logs path from `logs/*.log` to `artifacts/logs/*.log`
+- **Code cleanup** - Removed TODO comment from config.py
 
 ### Changed
-- Enhanced documentation to clarify xfail tests indicate application bugs, not test implementation issues
-- Reorganized README with traceability as first major section after header
-- Replaced ASCII flowchart with structured STEP format (PDF-safe rendering)
-- Clarified requirements.yml header to explain "PDF" citations refer to assignment document
+- **Screenshot capture logic** - Enhanced to capture both unexpected failures AND xfail tests (wasxfail attribute check)
+- **Cover letter focus** - Emphasized requirements elicitation from scratch as key differentiator
+- **Documentation quality** - Verified all 8 required README sections present and complete
 
 ## [1.0.0] - 2025-10-04
 
