@@ -3,41 +3,50 @@
 > **Assignment Philosophy:** "Frameworks matter less than you think. Better spend time polishing your deliverable as a whole."
 
 ## Table of Contents
-- [📊 Project Status: Phase 4 Complete - Ready for v0.4.0](#-project-status-phase-4-complete---ready-for-v040)
+- [📊 Project Status: Planning v1.0.0 Release](#-project-status-planning-v100-release)
   - [📋 Git Branch Tracking (for Assignment Evaluation)](#-git-branch-tracking-for-assignment-evaluation)
 - [🎯 CRITICAL SUCCESS FACTORS](#-critical-success-factors)
-- [Phase 1: Initial Framework Setup ✅ COMPLETED (v0.2.0)](#phase-1-initial-framework-setup--completed-v020)
-- [Phase 2: Documentation & Foundation ✅ COMPLETED](#phase-2-documentation--foundation--completed)
-- [Phase 3: Test Implementation ✅ COMPLETE](#phase-3-test-implementation--complete)
-- [Phase 4: API Validation & Technical Debt Cleanup ✅ COMPLETE](#phase-4-api-validation--technical-debt-cleanup--complete)
-- [Phase 5: Final Polish & Delivery ⏳ NEXT](#phase-5-final-polish--delivery--next)
+- [<span style="color:green">v0.1.0: Initial Framework Setup</span>](#v010-initial-framework-setup)
+- [<span style="color:green">v0.2.0: Documentation & Foundation</span>](#v020-documentation--foundation)
+- [<span style="color:green">v0.3.0: Test Implementation</span>](#v030-test-implementation)
+- [<span style="color:green">v0.4.0: API Validation & Technical Debt</span>](#v040-api-validation--technical-debt)
+- [<span style="color:green">v0.5.0: Planning & Rubric Analysis</span>](#v050-planning--rubric-analysis)
+- [Release v1.0.0  NEXT](#release-v100--next)
+- [v1.1.0: Traceability Infrastructure (FUTURE)](#v110-traceability-infrastructure-future)
+- [v1.2.0: Final Polish & Delivery (FUTURE)](#v120-final-polish--delivery-future)
 - [📦 TECHNICAL DEBT & DEFERRED ITEMS](#-technical-debt--deferred-items)
 - [💡 FOUNDATION STRATEGY - 1.5 DAYS](#-foundation-strategy---15-days)
 - [🎯 REMEMBER](#-remember)
 
-## 📊 Project Status: Phase 4 Complete - Ready for v0.4.0
-- **Current Branch:** `feature/test-api-and-debt` (ready to push)
-- **Next Phase:** Phase 5 Final Polish & Delivery (1-2 hours)
-- **Phase 3 Rubric:** 78/100 → **Phase 4 Rubric: 84/100** (+6 points from API validation)
-- **Phase 4 Changes:** API validation + screenshot demo + magic numbers cleanup + CI fix
+## 📊 Project Status: Planning v1.0.0 Release
+- **Current Branch:** `feature/test-rubric` (planning complete)
+- **Current VERSION:** 0.2.0 (last release on main)
+- **Rubric Score:** 84/100 (Good - Near Excellence)
+- **Next Step:** Release v1.0.0 (MAJOR - foundation complete)
+- **Foundation Status:** API validation + 8 tests + 5 defects + complete docs
 - **Tests:** 2 pass, 4 xfail, 1 xpass, 1 skip (8 total) + API assertions
-- **Defects:** 5 documented with evidence
-- **CI/CD:** GitHub Actions (CI fix added - pending push to test)
+- **CI/CD:**  PASSING on develop
 
 ### 📋 Git Branch Tracking (for Assignment Evaluation)
 **Policy:** Keep ALL remote branches to show development progression
 
 | Branch | Status | Purpose | Commits | Preserved |
 |--------|--------|---------|---------|-----------|
-| `main` | ✅ Current | Production releases | v0.2.0 tag | Yes |
-| `develop` | ✅ Current | Integration branch | Latest work | Yes |
-| `feature/update-todo` | ✅ Merged | Phase 2 documentation & foundation | eed4fa7 | **Remote kept** ✅ |
-| `feature/test-impl` | ⏳ Current | Phase 3 test implementation | TBD | Will keep |
+| `main` |  Current | Production releases | v0.2.0 | Yes |
+| `develop` |  Current | Integration | Latest | Yes |
+| `feature/update-todo` |  Merged | v0.2.0 work | eed4fa7 |  Remote kept |
+| `feature/test-impl` |  Merged | v0.3.0 work | 0c3436e |  Remote kept |
+| `feature/test-api-and-debt` |  Merged | Phase 4: API validation | 33ebd79 |  Remote kept |
+| `feature/test-rubric` |  Current | v1.0.0 planning | TBD | Will keep |
 
-**Commit History:**
-- `eed4fa7` - Phase 2 complete: docs + foundation setup (feature/update-todo)
-- `3f06fa3` - v0.2.0 release (release/0.2.0 → main)
-- `3d07371` - Initial framework setup
+**Key Commits:**
+- `d9f6946` - Merge Phase 4 to develop
+- `33ebd79` - Phase 4 rubric eval (84/100)
+- `5104f12` - Phase 4: API validation complete
+- `0c3436e` - Phase 3: Test implementation
+- `eed4fa7` - Phase 2: docs + foundation
+- `3f06fa3` - v0.2.0 release
+- `3d07371` - Initial framework
 - `1b14319` - Initial commit
 
 ---
@@ -58,7 +67,7 @@
 
 ---
 
-## Phase 1: Initial Framework Setup ✅ COMPLETED (v0.2.0)
+## <span style="color:green">v0.1.0: Initial Framework Setup</span>
 **Branch:** `release/0.2.0` → `main` + `develop`
 **Goal:** Get basic testing environment running fast
 **Commits:** `1b14319` (initial) → `3d07371` (framework) → `d5774b1` (v0.2.0)
@@ -76,11 +85,11 @@
 - [x] Makefile build automation
 - [x] Released v0.2.0 to main branch
 
-**Success Metric:** ✅ Can run tests with `make test-full` and see HTML + terminal reports
+**Success Metric:**  Can run tests with `make test-full` and see HTML + terminal reports
 
 ---
 
-## Phase 2: Documentation & Foundation ✅ COMPLETED (feature/update-todo)
+## <span style="color:green">v0.2.0: Documentation & Foundation</span>
 **Branch:** `feature/update-todo` (commit `eed4fa7`) → merged to `develop`
 **Goal:** Complete ALL documentation (requirements, defects, test strategy, test cases, README) + foundation code
 **Time Spent:** ~6-8 hours (over multiple sessions)
@@ -115,17 +124,17 @@
   - [x] Added Git Branch Tracking to README and TODO
   - [x] Added .gitignore rule for CI debugging artifacts
 
-**Success Metric:** ✅ All documentation complete, foundation ready for Phase 3 coding
+**Success Metric:**  All documentation complete, foundation ready for Phase 3 coding
 
 ---
 
-## Phase 3: Test Implementation ✅ COMPLETE (v0.3.0 Ready)
-**Branch:** `feature/test-impl` ✅ CREATED
+## <span style="color:green">v0.3.0: Test Implementation</span>
+**Branch:** `feature/test-impl`  CREATED
 **Goal:** Implement 8-10 test cases and complete test documentation
 **Time Budget:** 4-5 hours
 **Time Spent:** ~3 hours
 
-### PRIORITY 1: Complete Test Documentation ✅ DONE (1.5 hours)
+### PRIORITY 1: Complete Test Documentation  DONE (1.5 hours)
 - [x] Complete `docs/test-strategy.md` (280 lines):
   - [x] Risk-based priorities (Critical → High only)
   - [x] Test design techniques (BVA, EP, Negative, Decision Table, Exploratory)
@@ -135,13 +144,13 @@
   - [x] Reference `docs/design-decisions.md`
 
 - [x] Complete `docs/test-cases.md` (496 lines - 8 CRITICAL/HIGH cases):
-  - [x] 2 filtering tests (Popular, Trending) - with WHY ✅
-  - [x] 3 pagination tests (page 2, last page, filter persistence) - with WHY ✅
-  - [x] 2 negative tests (direct URL DEF-001, invalid page) - with WHY ✅
-  - [x] 1 combined filter test (Popular + Movies - deferred) - with WHY ✅
+  - [x] 2 filtering tests (Popular, Trending) - with WHY 
+  - [x] 3 pagination tests (page 2, last page, filter persistence) - with WHY 
+  - [x] 2 negative tests (direct URL DEF-001, invalid page) - with WHY 
+  - [x] 1 combined filter test (Popular + Movies - deferred) - with WHY 
   - [x] **WHY explanations complete for all 8 test cases**
 
-### PRIORITY 2: Implement Foundation Tests ✅ DONE (1.5 hours)
+### PRIORITY 2: Implement Foundation Tests  DONE (1.5 hours)
 - [x] Implement Page Object methods in `discover_page.py`:
   - [x] Filter actions (Popular, Trending, Newest, Top Rated)
   - [x] Pagination actions (Next, Previous, navigate to page)
@@ -163,22 +172,22 @@
 - [x] Add screenshots on failure (pytest hook in conftest.py → `screenshots/` dir)
 - [x] Basic API validation (deferred - UI focus for foundation)
 
-### PRIORITY 3: Quality & Reports ✅ DONE (30 min)
-- [x] Run `make quality` - Fixed logger issue, all checks PASS ✅
+### PRIORITY 3: Quality & Reports  DONE (30 min)
+- [x] Run `make quality` - Fixed logger issue, all checks PASS 
 - [ ] Run `make test-full` - Verify tests work
 - [ ] Verify HTML + Console reports
 - [ ] Clean up debug code (none needed)
 
-### 🚦 Phase Gate 3 Review - ALL COMPLETE ✅
-- [x] ✅ 8 test cases documented with WHY (docs/test-cases.md)
-- [x] ✅ Test strategy complete (docs/test-strategy.md)
-- [x] ✅ All tests implemented (tests/test_foundation.py)
-- [x] ✅ Tests verified PASSING (2 pass, 4 xfail, 1 xpass, 1 skip)
-- [x] ✅ Reports generated (HTML + coverage + logs)
-- [x] ✅ Rubric evaluation complete (78/100 - Good)
-- [x] ✅ Code quality checks pass (ruff, mypy, black)
+###  Phase Gate 3 Review - ALL COMPLETE 
+- [x]  8 test cases documented with WHY (docs/test-cases.md)
+- [x]  Test strategy complete (docs/test-strategy.md)
+- [x]  All tests implemented (tests/test_foundation.py)
+- [x]  Tests verified PASSING (2 pass, 4 xfail, 1 xpass, 1 skip)
+- [x]  Reports generated (HTML + coverage + logs)
+- [x]  Rubric evaluation complete (78/100 - Good)
+- [x]  Code quality checks pass (ruff, mypy, black)
 
-### ✅ CI Status
+###  CI Status
 **Status:** CI should be working on `feature/test-impl` branch
 **Fix Applied:** Commit `eed4fa7` replaced `__MYPY_PY_VERSION__` placeholder with `'3.13'`
 **Note:** Old `feature/update-todo` branch had CI issues at commit `fb84905`, but this branch includes the fix
@@ -187,13 +196,13 @@
 
 ---
 
-## Phase 4: API Validation & Technical Debt Cleanup ✅ COMPLETE
+## <span style="color:green">v0.4.0: API Validation & Technical Debt</span>
 **Branch:** `feature/test-api-and-debt` (commit 5104f12)
 **Goal:** Complete missing assignment requirement (API validation) + low-risk cleanup items
 **Time Spent:** 1.5 hours
 **Achievement:** API validation implemented - Assignment requirement R-5.3 satisfied!
 
-### PRIORITY 1: API Validation (ASSIGNMENT REQUIREMENT) ✅ DONE
+### PRIORITY 1: API Validation (ASSIGNMENT REQUIREMENT)  DONE
 **Gap:** Rubric R-5.3 - "Missing API validation" → lose 3-4 points
 **Assignment PDF Page 2:** "Usage of browser APIs calls and how you are asserting them"
 
@@ -208,7 +217,7 @@
 - [x] Update test-strategy.md with API validation approach
 - [x] Update README with API validation explanation
 
-### PRIORITY 2: Demonstrate Screenshot Capture ✅ DONE
+### PRIORITY 2: Demonstrate Screenshot Capture  DONE
 **Gap:** Feature implemented but not demonstrated (screenshots/ folder empty)
 **Why:** Shows complete error reporting pipeline (logs + HTML + screenshots)
 
@@ -219,7 +228,7 @@
 - [x] Update README: Add screenshot capture section with example
 - [x] Add comment in conftest.py explaining screenshot trigger conditions
 
-### PRIORITY 3: Magic Numbers Cleanup ✅ DONE
+### PRIORITY 3: Magic Numbers Cleanup  DONE
 **Gap:** Hardcoded values in test_foundation.py (violates CLAUDE.md standards)
 
 - [x] Move to `src/movie_db_qa/utils/config.py`:
@@ -228,59 +237,191 @@
 - [x] Update test_foundation.py to import from config
 - [x] Verify tests still pass
 
-### PRIORITY 4: CI Fix ✅ DONE
+### PRIORITY 4: CI Fix  DONE
 **Gap:** GitHub Actions CI failing - Playwright browsers not installed
 **Why:** Evaluators need to see CI pipeline GREEN
 
 - [x] Add `playwright install --with-deps chromium` to .github/workflows/ci.yml
 - [x] Ready to push and verify CI passes
 
-### 🚦 Phase Gate 4: Requirements Complete - ALL DONE ✅
-- [x] ✅ API validation implemented (R-5.3 satisfied)
+###  Phase Gate 4: Requirements Complete - ALL DONE 
+- [x]  API validation implemented (R-5.3 satisfied)
   - [x] Playwright network interception in conftest.py
   - [x] API assertions in 3 tests (TC-FLT-CAT-001, TC-FLT-CAT-002, TC-PAG-001)
   - [x] TMDB endpoints validated: `/movie/popular`, `/trending/movie/week`, page parameters
-- [x] ✅ Screenshot capture demonstrated
+- [x]  Screenshot capture demonstrated
   - [x] Example screenshot: `docs/images/example-test-failure-screenshot.png`
   - [x] Auto-capture working (pytest hook verified)
-- [x] ✅ Magic numbers eliminated
+- [x]  Magic numbers eliminated
   - [x] `config.base_url` and `config.expected_results_per_page` in config.py
   - [x] All hardcoded values removed from test_foundation.py
-- [x] ✅ All tests passing (2 pass, 4 xfail, 1 xpass, 1 skip)
-- [x] ✅ Quality checks pass (ruff, mypy, black)
-- [x] ✅ CI fix added (playwright install --with-deps chromium)
-- [x] ✅ Documentation updated (README + test-strategy.md with API validation sections)
-- [x] ✅ **Rubric Re-evaluation: 84/100** - achieved +6 points from Phase 3 (78→84) via API validation
+- [x]  All tests passing (2 pass, 4 xfail, 1 xpass, 1 skip)
+- [x]  Quality checks pass (ruff, mypy, black)
+- [x]  CI fix added (playwright install --with-deps chromium)
+- [x]  Documentation updated (README + test-strategy.md with API validation sections)
+- [x]  **Rubric Re-evaluation: 84/100** - achieved +6 points from Phase 3 (78→84) via API validation
 
 **Success Metric:** All explicit assignment requirements satisfied
 
 ---
 
-## Phase 5: Final Polish & Delivery ⏳ AFTER PHASE 4
+## <span style="color:green">v0.5.0: Planning & Rubric Analysis</span>
+**Branch:** `feature/test-rubric` (current)
+**Goal:** Plan v1.0.0 release + design validation infrastructure for future
+**Time Spent:** 2 hours
+
+### Completed Planning
+- [x] Updated CLAUDE.md with task-driven workflow
+- [x] Added TODO.md protection rules (no mass-delete!)
+- [x] Simplified TODO checkboxes (x or blank only - no emojis)
+- [x] v1.0.0 release justification (MAJOR - foundation complete, 84/100 rubric)
+- [x] v2.0.0 validation infrastructure design (docs/ai-qa-testing.md exists)
+
+### What's Ready for v1.0.0
+-  All assignment requirements met
+-  84/100 rubric (1 point from Excellence)
+-  Foundation complete (8 tests, 5 defects, docs)
+-  CI passing on develop
+-  Professional deliverable
+
+**Success Metric:** Planning complete, ready to release v1.0.0
+
+---
+
+## Release v1.0.0  NEXT
+**Version:** 1.0.0 (MAJOR - first production release)
+**Justification:** Foundation complete, all assignment requirements met, ready for evaluation
+
+### Release Steps
+1. [ ] Commit planning work (TODO + CLAUDE.md + .gitignore) - KEEPING REMOTE BRANCH
+2. [ ] Merge feature/test-rubric to develop (keep remote branch)
+3. [ ] Delete local feature/test-rubric (KEEPING REMOTE BRANCH)
+4. [ ] `git flow release start 1.0.0`
+5. [ ] Update VERSION: `1.0.0`
+6. [ ] Update CHANGELOG.md with v0.3.0 + Phase 4 changes
+7. [ ] Commit: `git commit -am "chore(release): bump version to 1.0.0"`
+8. [ ] Manual merge to preserve branches:
+   - `git checkout main && git merge --no-ff release/1.0.0`
+   - `git tag -a 1.0.0 -m "Release v1.0.0: Foundation Complete"`
+   - `git checkout develop && git merge --no-ff release/1.0.0`
+9. [ ] `git push origin main develop release/1.0.0 --tags`
+10. [ ] Verify CI passes on main
+
+### Release Gate
+- [ ] VERSION = 1.0.0
+- [ ] CHANGELOG updated
+- [ ] v1.0.0 tagged on main
+- [ ] release/1.0.0 preserved on remote
+- [ ] CI passing on main
+- [ ] All branches synced
+
+**Success Metric:** v1.0.0 on main, foundation delivered
+
+---
+
+## v1.1.0: Traceability Infrastructure (FUTURE)
+**Branch:** Will create `feature/traceability` from develop (after v1.0.0)
+**Goal:** Implement automated traceability (the paradigm shift)
+**Design Doc:** docs/ai-qa-testing.md
+**Rubric Target:** 87-90/100 (Excellence)
+**Time Budget:** 2-3 hours
+
+### Context: The Paradigm Shift
+From docs/ai-qa-testing.md - "Same ~15-20 hour effort, but with **provable completeness** instead of **hoped-for coverage**"
+
+Traditional QA deliverable:
+- Manual traceability (hope nothing missed)
+- Evaluator hunts for evidence (30 min)
+- "I think I got everything"
+
+AI-powered QA deliverable:
+- `make audit` proves requirements → design → tests → artifacts
+- Evaluator runs validation (2 min)
+- Machine-verified completeness
+
+### PRIORITY 1: Structured Requirements (1 hour)
+- [ ] Create `requirements.yml` (structured data)
+  - [ ] Convert docs/requirements.md to YAML format
+  - [ ] Add traceability fields: source (PDF page), rubric (R-X), design (DD-X), artifacts (paths)
+  - [ ] Example structure from ai-qa-testing.md:
+    ```yaml
+    REQ-001:
+      desc: "HTML test report required"
+      source: "PDF p.2"
+      rubric: "R-5"
+      design: "DD-9.2"
+      artifacts: ["htmlcov/index.html"]
+    ```
+
+### PRIORITY 2: Automated Audit Script (1 hour)
+- [ ] Create `scripts/audit_requirements.py`
+  - [ ] Load requirements.yml
+  - [ ] Validate design doc references (grep for [REQ-XXX] tags)
+  - [ ] Validate artifacts exist (Path checks)
+  - [ ] Detect orphaned implementations (tests without requirements)
+  - [ ] Report: "✅ All 15 requirements validated" or fail with gaps
+
+### PRIORITY 3: Makefile Integration (30 min)
+- [ ] Add `make audit` target
+  - [ ] Run scripts/audit_requirements.py
+  - [ ] Exit code 0 = pass, 1 = fail
+  - [ ] CI: Add audit to workflow (fail build if gaps)
+- [ ] Add `make rubric-eval` target (optional)
+  - [ ] AI-powered rubric scoring from eval-rubric.md
+  - [ ] Output: "📊 Rubric score: 87/100 (Excellent)"
+
+### PRIORITY 4: Documentation Update (30 min)
+- [ ] Update README with validation section
+  - [ ] Explain `make audit` workflow
+  - [ ] Show evaluator how to verify completeness (2 min vs 30 min)
+- [ ] Update design-decisions.md
+  - [ ] Add section on AI-powered validation approach
+  - [ ] Reference docs/ai-qa-testing.md
+
+### Phase Gate v1.1.0
+- [ ] requirements.yml created (machine-readable)
+- [ ] `make audit` passes (all requirements traced)
+- [ ] No orphaned implementations
+- [ ] No missing artifacts
+- [ ] Documentation updated
+- [ ] Rubric re-evaluation: target 87-90/100
+
+**Success Metric:** `make audit` proves nothing missed - paradigm shift delivered
+
+**Key Innovation:** Treating requirements as structured data enables AI to validate the entire test design chain automatically.
+
+**Value Proposition:**
+- Same 15-20 hour effort
+- Provable completeness (not hope)
+- 2 hours invested in automation = evaluator saves 30 min + confidence boost
+
+---
+
+## v1.2.0: Final Polish & Delivery (FUTURE)
 **Branch:** Will create `feature/polish` after Phase 4 complete
 **Goal:** Clean, professional deliverable
 **Time Budget:** 1-2 hours MAX
 
-### PRIORITY 1: Quality Verification (30 min) 🚨 DO FIRST
+### PRIORITY 1: Quality Verification (30 min)  DO FIRST
 - [ ] Run `make quality` - Fix all Ruff/MyPy issues
 - [ ] Run `make test-full` 2-3 times - Verify stable
 - [ ] Check HTML report looks professional
 - [ ] Check console output is clear
 - [ ] Verify CI is GREEN on GitHub
 
-### PRIORITY 2: Code Cleanup (30 min) 🚨 DO SECOND
+### PRIORITY 2: Code Cleanup (30 min)  DO SECOND
 - [ ] Remove any debug code, print statements
 - [ ] Clean up comments (keep useful, remove clutter)
 - [ ] Verify consistent naming throughout
 - [ ] Check no unused imports/dependencies
 
-### PRIORITY 3: Documentation Final Check (30 min) 🚨 DO THIRD
+### PRIORITY 3: Documentation Final Check (30 min)  DO THIRD
 - [ ] Proofread README - fix typos
 - [ ] Test ALL commands in README work
 - [ ] Verify all links work (docs/, rubric/)
 - [ ] Check all 8 sections present and complete
 
-### PRIORITY 4: Delivery (30 min) 🚨 FINAL STEP
+### PRIORITY 4: Delivery (30 min)  FINAL STEP
 - [ ] Review git history - meaningful commits
 - [ ] Merge to develop
 - [ ] Create release branch from develop
@@ -288,7 +429,7 @@
 - [ ] Verify repo is public
 - [ ] Final verification: Clone fresh and run tests
 
-### 🚦 Phase Gate 5: Final Delivery Check
+### Phase Gate v1.2.0: Final Delivery Check
 - [ ] All foundation tests PASS
 - [ ] All documentation COMPLETE (8 sections)
 - [ ] Minimum 5 defects documented
@@ -383,12 +524,12 @@ Before submission, verify:
 
 | Phase | Foundation | Expand (if time) | Status |
 |-------|-----------|------------------|---------|
-| Phase 1: Setup | ✅ 2-3 hrs | - | COMPLETE (v0.2.0) |
-| Phase 2: Test Design | 3-4 hrs | +2 hrs more cases | 🔴 NEXT |
-| Phase 3: Implementation | 4-5 hrs | +2 hrs more tests | 🔴 CRITICAL |
-| Phase 4: Defects | 1.5-2 hrs | +1 hr more bugs | 🔴 CRITICAL |
-| Phase 5: README | 2-3 hrs | +1 hr polish | 🔴 CRITICAL |
-| Phase 6: Polish | 1-2 hrs | - | 🔴 FINAL |
+| Phase 1: Setup |  2-3 hrs | - | COMPLETE (v0.2.0) |
+| Phase 2: Test Design | 3-4 hrs | +2 hrs more cases |  NEXT |
+| Phase 3: Implementation | 4-5 hrs | +2 hrs more tests |  CRITICAL |
+| Phase 4: Defects | 1.5-2 hrs | +1 hr more bugs |  CRITICAL |
+| Phase 5: README | 2-3 hrs | +1 hr polish |  CRITICAL |
+| Phase 6: Polish | 1-2 hrs | - |  FINAL |
 | **TOTAL** | **12-16 hrs** | **+6 hrs** | |
 
 **Foundation = Passing Score (70/100):**
@@ -408,7 +549,7 @@ Before submission, verify:
 
 ## 📦 TECHNICAL DEBT & DEFERRED ITEMS
 
-### ✅ Implemented (Demonstrable Proof)
+###  Implemented (Demonstrable Proof)
 
 | Feature | Implementation Location |
 |---------|------------------------|
@@ -427,7 +568,7 @@ Before submission, verify:
 | Cross-Browser Matrix | Chrome only, not Firefox/Safari/Edge | 1-2 hrs |
 | Comprehensive API Validation | 2-3 examples sufficient for assignment | 2-3 hrs |
 
-### ❌ Out of Scope (Won't Do)
+###  Out of Scope (Won't Do)
 
 | Item | Reason | Effort |
 |------|--------|--------|
@@ -443,11 +584,11 @@ Before submission, verify:
 ## 💡 FOUNDATION STRATEGY - 1.5 DAYS
 
 ### Critical Path (Must Do - 12-16 hours)
-1. ✅ **Phase 2 (3-4 hrs):** Document 8-10 test cases with WHY + CI fix
-2. ✅ **Phase 3 (4-5 hrs):** Implement those 8-10 tests - WORKING
-3. ✅ **Phase 4 (1.5-2 hrs):** Find and document 5 defects with evidence
-4. ✅ **Phase 5 (2-3 hrs):** README answers ALL 8 questions
-5. ✅ **Phase 6 (1-2 hrs):** Polish, CI GREEN, professional delivery
+1.  **Phase 2 (3-4 hrs):** Document 8-10 test cases with WHY + CI fix
+2.  **Phase 3 (4-5 hrs):** Implement those 8-10 tests - WORKING
+3.  **Phase 4 (1.5-2 hrs):** Find and document 5 defects with evidence
+4.  **Phase 5 (2-3 hrs):** README answers ALL 8 questions
+5.  **Phase 6 (1-2 hrs):** Polish, CI GREEN, professional delivery
 
 ### High-Impact Actions (Do These!)
 1. ⭐ **Explain WHY** for every test case (30% of score)
